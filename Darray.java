@@ -165,37 +165,176 @@ import java.util.*;
     
 // }
 
-public class Darray{
-    public static int duplicate(int arr[] , int n){
-        int i = 0;
-        for (int j=1; j<n; j++){
-            if(arr[j] != arr[i]){
-                arr[i+1] = arr[j];
-                i++;
+// public class Darray{
+//     public static int duplicate(int arr[] , int n){
+//         int i = 0;
+//         for (int j=1; j<n; j++){
+//             if(arr[j] != arr[i]){
+//                 arr[i+1] = arr[j];
+//                 i++;
+//             }
+//         }
+//         return (i+1);
+//     }
+
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int arr[] = new int[n];
+
+//         System.out.println("Enter sorted array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         int newLength = duplicate(arr, n);
+
+//         System.out.println("Array after removing duplicates:");
+
+//         for (int i = 0; i < newLength; i++) {
+//             System.out.print(arr[i] + " ");
+//         }
+// }
+// }
+
+
+
+// public class Darray{
+//     public static int[] rotate(int arr[] , int n){
+//         int temp = arr[0];
+//         for(int i=1; i<n; i++){
+//             arr[i-1] = arr[i];
+//         }
+//         arr[n-1] = temp;
+//         return arr;
+//     }
+
+//     public static void main(String[] args){
+//         Scanner sc = new Scanner (System.in);
+//         System.out.println("Enter the size of array:");
+//         int n = sc.nextInt();
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements");
+//         for(int i=0; i<n; i++){
+//             arr[i]=sc.nextInt();
+//         }
+//         rotate(arr, n);
+
+//         System.out.println("Array after rotate");
+//         for(int i=0; i<n; i++){
+//             System.out.println(arr[i] + " ");
+//         }
+//     }
+// }
+
+
+// public class Darray{
+//     public static void reverse(int arr[], int start,int end){
+//         while(start<end){
+//             int temp = arr[start];
+//             arr[start] = arr[end];
+//             arr[end] = temp;
+//             start++;
+//             end--;
+//         }
+//     }
+
+//     public static void krotate(int arr[], int n, int d){
+//         if(n<=0){
+//             return;
+//         }
+//         d= d%n;
+//         if(d<0){
+//             d+=n;
+//         }
+
+//         reverse(arr,0,d-1);
+//         reverse(arr, d, n-1);
+//         reverse(arr, 0, n-1);
+//     }
+
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter the size of array: ");
+//         int n = sc.nextInt();
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         System.out.print("Enter rotation amount d: ");
+//         int d = sc.nextInt();
+
+//         krotate(arr, n, d);
+
+//         System.out.println("Array after rotating by " + d + ":");
+//         for (int x : arr) {
+//             System.out.print(x + " ");
+//         }
+//         System.out.println();
+//         sc.close();
+//     }
+// }
+
+
+public class Darray {
+
+    public static void zeroshift(int arr[], int n) {
+
+        int j = -1;
+
+        
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == 0) {
+                j = i;
+                break;
             }
         }
-        return (i+1);
+
+        
+        if (j == -1) {
+            return;
+        }
+
+        
+        for (int i = j + 1; i < n; i++) {
+            if (arr[i] != 0) {
+
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+
+                j++;
+            }
+        }
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter size of array: ");
-        int n = sc.nextInt();
+    System.out.print("Enter size of array: ");
+    int n = sc.nextInt();
+    int[] arr = new int[n];
 
-        int arr[] = new int[n];
+    System.out.println("Enter array elements:");
+    for (int i = 0; i < n; i++) {
+        arr[i] = sc.nextInt();
+    }
 
-        System.out.println("Enter sorted array elements:");
-        for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-        }
+    zeroshift(arr, n);
 
-        int newLength = duplicate(arr, n);
-
-        System.out.println("Array after removing duplicates:");
-
-        for (int i = 0; i < newLength; i++) {
-            System.out.print(arr[i] + " ");
-        }
+    System.out.println("Array after shifting zeros to end:");
+    for (int x : arr) {
+        System.out.print(x + " ");
+    }
+    System.out.println();
+    sc.close();
 }
 }
