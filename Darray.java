@@ -466,68 +466,69 @@ import java.util.*;
 
 
 
-public class Darray {
+// public class Darray {
 
-    public static ArrayList<Integer> intersectionArray(int[] nums1, int[] nums2) {
-        ArrayList<Integer> intersection = new ArrayList<>();
+//     public static ArrayList<Integer> intersectionArray(int[] nums1, int[] nums2) {
+//         ArrayList<Integer> intersection = new ArrayList<>();
 
-        int i = 0, j = 0;
+//         int i = 0, j = 0;
 
-        while (i < nums1.length && j < nums2.length) {
+//         while (i < nums1.length && j < nums2.length) {
 
-            if (nums1[i] == nums2[j]) {
+//             if (nums1[i] == nums2[j]) {
 
-                if (intersection.size() == 0 ||
-                    intersection.get(intersection.size() - 1) != nums1[i]) {
-                    intersection.add(nums1[i]);
-                }
+//                 if (intersection.size() == 0 ||
+//                     intersection.get(intersection.size() - 1) != nums1[i]) {
+//                     intersection.add(nums1[i]);
+//                 }
 
-                i++;
-                j++;
-            }
+//                 i++;
+//                 j++;
+//             }
 
-            else if (nums1[i] < nums2[j]) {
-                i++;
-            }
+//             else if (nums1[i] < nums2[j]) {
+//                 i++;
+//             }
 
-            else {
-                j++;
-            }
-        }
+//             else {
+//                 j++;
+//             }
+//         }
 
-        return intersection;
-    }
+//         return intersection;
+//     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
 
-        // First array
-        System.out.print("Enter size of first array: ");
-        int n = sc.nextInt();
+//         // First array
+//         System.out.print("Enter size of first array: ");
+//         int n = sc.nextInt();
 
-        int[] nums1 = new int[n];
+//         int[] nums1 = new int[n];
 
-        System.out.println("Enter elements of first sorted array:");
-        for (int i = 0; i < n; i++) {
-            nums1[i] = sc.nextInt();
-        }
+//         System.out.println("Enter elements of first sorted array:");
+//         for (int i = 0; i < n; i++) {
+//             nums1[i] = sc.nextInt();
+//         }
 
-        // Second array
-        System.out.print("Enter size of second array: ");
-        int m = sc.nextInt();
+//         // Second array
+//         System.out.print("Enter size of second array: ");
+//         int m = sc.nextInt();
 
-        int[] nums2 = new int[m];
+//         int[] nums2 = new int[m];
 
-        System.out.println("Enter elements of second sorted array:");
-        for (int i = 0; i < m; i++) {
-            nums2[i] = sc.nextInt();
-        }
+//         System.out.println("Enter elements of second sorted array:");
+//         for (int i = 0; i < m; i++) {
+//             nums2[i] = sc.nextInt();
+//         }
 
-        ArrayList<Integer> result = intersectionArray(nums1, nums2);
+//         ArrayList<Integer> result = intersectionArray(nums1, nums2);
 
-        System.out.println("Intersection of arrays:");
-        System.out.println(result);
+//         System.out.println("Intersection of arrays:");
+//         System.out.println(result);
 
-        sc.close();
-    }
-}
+//         sc.close();
+//     }
+// }
+
