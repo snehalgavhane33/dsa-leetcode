@@ -102,55 +102,275 @@ import java.util.*;
 //     }
 // }
 
+
 //optimal solution for 012
-
-public class Darray2{
-    public static void sort012(int[] arr, int n){
-        int low = 0; 
-        int mid =0; 
-        int high = n-1;
+// public class Darray2{
+//     public static void sort012(int[] arr, int n){
+//         int low = 0; 
+//         int mid =0; 
+//         int high = n-1;
         
-        while (mid <= high){
-            if(arr[mid]==0){
-                int temp = arr[low];
-                arr[low] = arr[mid];
-                arr[mid] = temp;
-                low++;
-                mid++;
+//         while (mid <= high){
+//             if(arr[mid]==0){
+//                 int temp = arr[low];
+//                 arr[low] = arr[mid];
+//                 arr[mid] = temp;
+//                 low++;
+//                 mid++;
+//             }
+//             else if(arr[mid] == 1){
+//                 mid++;
+//             }
+//             else{
+//                 int temp = arr[mid];
+//                 arr[mid]=arr[high];
+//                 arr[high]=temp;
+//                 high--;
+//             }
+//         }
+//     }
+
+//     public static void main(String[] args) {
+
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements (only 0, 1, 2):");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         sort012(arr, n);
+
+//         System.out.println("Sorted Array:");
+//         for (int i = 0; i < n; i++) {
+//             System.out.print(arr[i] + " ");
+//         }
+
+//         sc.close();
+//     }
+// }
+
+// majority element appears more than N/2 times better 
+// public class Darray2{
+//     public static int majorityElement(int[] arr, int n){
+//         HashMap <Integer , Integer> map = new HashMap<>();
+    
+//         for(int i=0; i<n; i++){
+//             map.put(arr[i], map.getOrDefault(arr[i], 0) + 1);
+//         }
+
+//         for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+//             if(entry.getValue()>n/2){
+//                 return entry.getKey();
+//             }
+//         }
+//         return -1;
+//     }
+
+//     public static void main(String[] args) {
+
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         int ans = majorityElement(arr, n);
+
+//         System.out.println("Majority Element = " + ans);
+
+//         sc.close();
+//     }
+// }
+
+
+// majority element appears more than N/2 times optimal
+// public class Darray2{
+//     public static int majorityElement(int[] arr, int n){
+//         int cnt=0;
+//         int el = 0;
+//         for(int i=0; i<n; i++){
+//             if(cnt==0){
+//                 cnt=1;
+//                 el=arr[i];
+//             }
+//             else if(arr[i]==el){
+//                 cnt++;
+//             }
+//             else{
+//                 cnt--;
+//             }
+//         }
+
+//         int cnt1 =0;
+//         for(int i=0; i<n; i++){
+//             if(arr[i]==el) cnt1++;
+//         }
+//         if(cnt1 > n/2){
+//             return el;
+//         }
+//         return -1;
+//     }
+
+//         public static void main(String[] args) {
+
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         int ans = majorityElement(arr, n);
+
+//         System.out.println("Majority Element = " + ans);
+
+//         sc.close();
+//     }
+// }
+
+//kadane's algorithm maximum subarray sum solution better approach
+// public class Darray2{
+//     public static int maxSubArray(int[] arr, int n){
+//         int maxi = Integer.MIN_VALUE;
+//         for(int i=0; i<n; i++){
+//             int sum = 0;
+//             for(int j=i; j<n; j++){
+//                 sum += arr[j];
+//                 maxi =Math.max(maxi , sum);
+//             }
+//         }
+//         return maxi;
+//     }
+//     public static void main(String[] args) {
+
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         int ans = maxSubArray(arr, n);
+
+//         System.out.println("Maximum Subarray Sum = " + ans);
+
+//         sc.close();
+//     }
+// }
+
+// kadane's algorithm maximum subarray sum solution optimal1 approach
+// public class Darray2{
+//     public static int maxSubArray(int[] nums){
+//         int sum =0;
+//         int maxi = Integer.MIN_VALUE;
+//         int n = nums.length;
+//         for(int i=0;i<n;i++){
+//              sum += nums[i];
+//             if(sum>maxi){
+//                 maxi=sum;
+//             }
+//             if(sum<0){
+//                 sum=0;
+//             }
+//         }
+//         return maxi;
+//     }
+//     public static void main(String[] args) {
+
+//     Scanner sc = new Scanner(System.in);
+
+//     System.out.print("Enter size of array: ");
+//     int n = sc.nextInt();
+
+//     int[] nums = new int[n];
+
+//     System.out.println("Enter array elements:");
+//     for (int i = 0; i < n; i++) {
+//         nums[i] = sc.nextInt();
+//     }
+
+//     int ans = maxSubArray(nums);
+
+//     System.out.println("Maximum Subarray Sum = " + ans);
+
+//     sc.close();
+// }
+//}
+
+// kadane's algorithm maximum subarray sum solution optimal2 approach
+
+public class Darray2 {
+
+    public static int maxSubArray(int[] arr , int n){
+        int sum=0;
+        int maxi = Integer.MIN_VALUE;
+        int start = 0;
+        int ansStart = -1;
+        int ansEnd = -1;
+
+        for(int i=0; i<n; i++){
+            if(sum==0){
+                start = i;
             }
-            else if(arr[mid] == 1){
-                mid++;
+
+            sum += arr[i];
+
+            if(sum>maxi){
+                maxi =sum;
+                ansStart = start;
+                ansEnd = i;
             }
-            else{
-                int temp = arr[mid];
-                arr[mid]=arr[high];
-                arr[high]=temp;
-                high--;
+            if(sum<0){
+                sum=0;
             }
         }
-    }
-
-    public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter size of array: ");
-        int n = sc.nextInt();
-
-        int[] arr = new int[n];
-
-        System.out.println("Enter array elements (only 0, 1, 2):");
-        for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-        }
-
-        sort012(arr, n);
-
-        System.out.println("Sorted Array:");
-        for (int i = 0; i < n; i++) {
+        System.out.print("Maximum Subarray:");
+        for(int i= ansStart; i<=ansEnd; i++){
             System.out.print(arr[i] + " ");
         }
-
-        sc.close();
+        System.out.println();
+        return maxi;
     }
+    public static void main(String[] args) {
+
+    Scanner sc = new Scanner(System.in);
+
+    System.out.print("Enter size of array: ");
+    int n = sc.nextInt();
+
+    int[] arr = new int[n];
+
+    System.out.println("Enter array elements:");
+    for (int i = 0; i < n; i++) {
+        arr[i] = sc.nextInt();
+    }
+
+    int ans = maxSubArray(arr,n);
+
+    System.out.println("Maximum Subarray Sum = " + ans);
+
+    sc.close();
+}
 }
