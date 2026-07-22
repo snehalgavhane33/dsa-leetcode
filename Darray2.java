@@ -321,56 +321,252 @@ import java.util.*;
 
 // kadane's algorithm maximum subarray sum solution optimal2 approach
 
+// public class Darray2 {
+
+//     public static int maxSubArray(int[] arr , int n){
+//         int sum=0;
+//         int maxi = Integer.MIN_VALUE;
+//         int start = 0;
+//         int ansStart = -1;
+//         int ansEnd = -1;
+
+//         for(int i=0; i<n; i++){
+//             if(sum==0){
+//                 start = i;
+//             }
+
+//             sum += arr[i];
+
+//             if(sum>maxi){
+//                 maxi =sum;
+//                 ansStart = start;
+//                 ansEnd = i;
+//             }
+//             if(sum<0){
+//                 sum=0;
+//             }
+//         }
+//         System.out.print("Maximum Subarray:");
+//         for(int i= ansStart; i<=ansEnd; i++){
+//             System.out.print(arr[i] + " ");
+//         }
+//         System.out.println();
+//         return maxi;
+//     }
+//     public static void main(String[] args) {
+ 
+//     Scanner sc = new Scanner(System.in);
+
+//     System.out.print("Enter size of array: ");
+//     int n = sc.nextInt();
+
+//     int[] arr = new int[n];
+
+//     System.out.println("Enter array elements:");
+//     for (int i = 0; i < n; i++) {
+//         arr[i] = sc.nextInt();
+//     }
+
+//     int ans = maxSubArray(arr,n);
+
+//     System.out.println("Maximum Subarray Sum = " + ans);
+
+//     sc.close();
+// }
+// }
+
+
+//Buy and sell stock 
+// public class Darray2 {
+
+//     public static int maxProfit(int[] arr){
+//         int n = arr.length;
+//         int mini = arr[0];
+//         int maxprofit = 0;
+
+//         for(int i=0; i<n; i++){
+//             int profit = arr[i] - mini;
+//             maxprofit = Math.max(maxprofit,profit);
+//             mini = Math.min(mini, arr[i]);
+
+//         }
+//         return maxprofit;
+
+//     }
+
+//     public static void main(String[] args) {
+
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter number of days: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter stock prices:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         int ans = maxProfit(arr);
+
+//         System.out.println("Maximum Profit = " + ans);
+
+//         sc.close();
+//     }
+// }
+
+
+// rearrange array by sign
+
+// public class Darray2 {
+
+//     public static int[] rearrangeArray(int[] arr){
+//         int n = arr.length;
+//         int[] ans = new int[n];
+//         int posIndex = 0;
+//         int negIndex = 1;
+
+//         for(int i=0; i<n; i++){
+//             if(arr[i]<0){
+//                 ans[negIndex] = arr[i];
+//                 negIndex += 2;
+//             }
+//             else{
+//                 ans[posIndex] = arr[i];
+//                 posIndex += 2;
+//             }
+//         }
+//         return ans;
+//     }
+
+//     public static void main(String[] args) {
+
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         int[] result = rearrangeArray(arr);
+
+//         System.out.println("Rearranged Array:");
+
+//         for (int x : result) {
+//             System.out.print(x + " ");
+//         }
+
+//         sc.close();
+//     }
+// }
+
+// rearrange by sign 2
+
+// public class Darray2 {
+
+//     public  static int[] rearrangeArray(int[] arr){
+//         int n = arr.length;
+//         ArrayList<Integer> pos = new ArrayList<>();
+//         ArrayList<Integer> neg = new ArrayList<>();
+
+//         for(int i=0; i<n; i++){
+//             if(arr[i]>0){
+//                 pos.add(arr[i]);
+//             }
+//             else{
+//                 neg.add(arr[i]);
+//             }
+//         }
+
+//         if(pos.size() > neg.size()){
+//             for(int i=0; i< neg,size(); i++){
+//                 arr[2*i] = pos.get(i);
+//                 arr[2*i+1] = neg.get(i);
+//             }
+
+//             int index = pos.size() * 2;
+//               for (int i = pos.size(); i < neg.size(); i++) {
+//                 arr[index] = neg.get(i);                 
+//                 index++;
+//               }
+//         }
+//         return arr;
+//     }
+// }
+
+
+
+// next permutation find
 public class Darray2 {
 
-    public static int maxSubArray(int[] arr , int n){
-        int sum=0;
-        int maxi = Integer.MIN_VALUE;
-        int start = 0;
-        int ansStart = -1;
-        int ansEnd = -1;
+    public static void nextPermutation(int[] arr){
+        int n = arr.length;
+        int ind = -1;
 
-        for(int i=0; i<n; i++){
-            if(sum==0){
-                start = i;
-            }
-
-            sum += arr[i];
-
-            if(sum>maxi){
-                maxi =sum;
-                ansStart = start;
-                ansEnd = i;
-            }
-            if(sum<0){
-                sum=0;
+        for(int i=n-2; i>=0; i--){
+            if(arr[i]< arr[i+1]){
+                ind = i;
+                break;
             }
         }
-        System.out.print("Maximum Subarray:");
-        for(int i= ansStart; i<=ansEnd; i++){
-            System.out.print(arr[i] + " ");
+        if(ind==-1){
+            reverse(arr,0,n-1);
+            return;
         }
-        System.out.println();
-        return maxi;
+
+        for(int i=n-1; i> ind; i--){
+            if(arr[i]>arr[ind]){
+                int temp = arr[i];
+                arr[i]=arr[ind];
+                arr[ind]=temp;
+
+                break;
+            }
+        }
+        reverse(arr, ind + 1, n - 1);
     }
+
+     public static void reverse(int[] arr, int start, int end) {
+
+        while (start < end) {
+
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+
+            start++;
+            end--;
+        }
+    }
+
     public static void main(String[] args) {
 
-    Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
-    System.out.print("Enter size of array: ");
-    int n = sc.nextInt();
+        System.out.print("Enter size of array: ");
+        int n = sc.nextInt();
 
-    int[] arr = new int[n];
+        int[] arr = new int[n];
 
-    System.out.println("Enter array elements:");
-    for (int i = 0; i < n; i++) {
-        arr[i] = sc.nextInt();
+        System.out.println("Enter array elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        nextPermutation(arr);
+
+        System.out.println("Next Permutation:");
+
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+
+        sc.close();
     }
-
-    int ans = maxSubArray(arr,n);
-
-    System.out.println("Maximum Subarray Sum = " + ans);
-
-    sc.close();
-}
 }
