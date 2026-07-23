@@ -503,48 +503,89 @@ import java.util.*;
 
 
 // next permutation find
+// public class Darray2 {
+
+//     public static void nextPermutation(int[] arr){
+//         int n = arr.length;
+//         int ind = -1;
+
+//         for(int i=n-2; i>=0; i--){
+//             if(arr[i]< arr[i+1]){
+//                 ind = i;
+//                 break;
+//             }
+//         }
+//         if(ind==-1){
+//             reverse(arr,0,n-1);
+//             return;
+//         }
+
+//         for(int i=n-1; i> ind; i--){
+//             if(arr[i]>arr[ind]){
+//                 int temp = arr[i];
+//                 arr[i]=arr[ind];
+//                 arr[ind]=temp;
+
+//                 break;
+//             }
+//         }
+//         reverse(arr, ind + 1, n - 1);
+//     }
+
+//      public static void reverse(int[] arr, int start, int end) {
+
+//         while (start < end) {
+
+//             int temp = arr[start];
+//             arr[start] = arr[end];
+//             arr[end] = temp;
+
+//             start++;
+//             end--;
+//         }
+//     }
+
+//     public static void main(String[] args) {
+
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         nextPermutation(arr);
+
+//         System.out.println("Next Permutation:");
+
+//         for (int num : arr) {
+//             System.out.print(num + " ");
+//         }
+
+//         sc.close();
+//     }
+// }
+
 public class Darray2 {
 
-    public static void nextPermutation(int[] arr){
-        int n = arr.length;
-        int ind = -1;
+    public static ArrayList<Integer> leaders(int[] arr , int n){
+        ArrayList<Integer> ans = new ArrayList<>();
+        int maxi = Integer.MIN_VALUE;
 
-        for(int i=n-2; i>=0; i--){
-            if(arr[i]< arr[i+1]){
-                ind = i;
-                break;
+        for(int i=n-1; i>=0; i--){
+            if(arr[i]> maxi){
+                ans.add(arr[i]);
             }
+            maxi=Math.max(maxi,arr[i]);
         }
-        if(ind==-1){
-            reverse(arr,0,n-1);
-            return;
-        }
-
-        for(int i=n-1; i> ind; i--){
-            if(arr[i]>arr[ind]){
-                int temp = arr[i];
-                arr[i]=arr[ind];
-                arr[ind]=temp;
-
-                break;
-            }
-        }
-        reverse(arr, ind + 1, n - 1);
+        Collections.reverse(ans);
+        return ans;
     }
-
-     public static void reverse(int[] arr, int start, int end) {
-
-        while (start < end) {
-
-            int temp = arr[start];
-            arr[start] = arr[end];
-            arr[end] = temp;
-
-            start++;
-            end--;
-        }
-    }
-
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -559,12 +600,12 @@ public class Darray2 {
             arr[i] = sc.nextInt();
         }
 
-        nextPermutation(arr);
+        ArrayList<Integer> result = leaders(arr, n);
 
-        System.out.println("Next Permutation:");
+        System.out.println("Leader Elements:");
 
-        for (int num : arr) {
-            System.out.print(num + " ");
+        for (int x : result) {
+            System.out.print(x + " ");
         }
 
         sc.close();
