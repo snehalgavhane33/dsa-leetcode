@@ -571,20 +571,72 @@ import java.util.*;
 //     }
 // }
 
+// public class Darray2 {
+
+//     public static ArrayList<Integer> leaders(int[] arr , int n){
+//         ArrayList<Integer> ans = new ArrayList<>();
+//         int maxi = Integer.MIN_VALUE;
+
+//         for(int i=n-1; i>=0; i--){
+//             if(arr[i]> maxi){
+//                 ans.add(arr[i]);
+//             }
+//             maxi=Math.max(maxi,arr[i]);
+//         }
+//         Collections.reverse(ans);
+//         return ans;
+//     }
+//     public static void main(String[] args) {
+
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         ArrayList<Integer> result = leaders(arr, n);
+
+//         System.out.println("Leader Elements:");
+
+//         for (int x : result) {
+//             System.out.print(x + " ");
+//         }
+
+//         sc.close();
+//     }
+// }
+
 public class Darray2 {
 
-    public static ArrayList<Integer> leaders(int[] arr , int n){
-        ArrayList<Integer> ans = new ArrayList<>();
-        int maxi = Integer.MIN_VALUE;
-
-        for(int i=n-1; i>=0; i--){
-            if(arr[i]> maxi){
-                ans.add(arr[i]);
-            }
-            maxi=Math.max(maxi,arr[i]);
+    public static int longestSuccessiveEle(int[] arr, int n){
+        if(n==0){
+            return 0;
         }
-        Collections.reverse(ans);
-        return ans;
+        Arrays.sort(arr);
+        int lastSmaller = Integer.MIN_VALUE;
+        int cnt = 0;
+        int longest = 1;
+        for(int i=0; i<n;i++){
+            if(arr[i] - 1== lastSmaller){
+                cnt++;
+                lastSmaller=arr[i];
+            }
+            else if(arr[i]==lastSmaller){
+                continue;
+            }
+            else{
+                cnt = 1;
+                lastSmaller=arr[i];
+            }
+             longest = Math.max(longest, cnt);
+        }
+        return longest;
     }
     public static void main(String[] args) {
 
@@ -596,17 +648,14 @@ public class Darray2 {
         int[] arr = new int[n];
 
         System.out.println("Enter array elements:");
+
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
-        ArrayList<Integer> result = leaders(arr, n);
+        int ans = longestSuccessiveEle(arr, n);
 
-        System.out.println("Leader Elements:");
-
-        for (int x : result) {
-            System.out.print(x + " ");
-        }
+        System.out.println("Longest Consecutive Sequence Length = " + ans);
 
         sc.close();
     }
