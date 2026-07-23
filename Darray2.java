@@ -612,29 +612,84 @@ import java.util.*;
 //     }
 // }
 
+// public class Darray2 {
+
+//     public static int longestSuccessiveEle(int[] arr, int n){
+//         if(n==0){
+//             return 0;
+//         }
+//         Arrays.sort(arr);
+//         int lastSmaller = Integer.MIN_VALUE;
+//         int cnt = 0;
+//         int longest = 1;
+//         for(int i=0; i<n;i++){
+//             if(arr[i] - 1== lastSmaller){
+//                 cnt++;
+//                 lastSmaller=arr[i];
+//             }
+//             else if(arr[i]==lastSmaller){
+//                 continue;
+//             }
+//             else{
+//                 cnt = 1;
+//                 lastSmaller=arr[i];
+//             }
+//              longest = Math.max(longest, cnt);
+//         }
+//         return longest;
+//     }
+//     public static void main(String[] args) {
+
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         int ans = longestSuccessiveEle(arr, n);
+
+//         System.out.println("Longest Consecutive Sequence Length = " + ans);
+
+//         sc.close();
+//     }
+// }
+
 public class Darray2 {
 
     public static int longestSuccessiveEle(int[] arr, int n){
         if(n==0){
             return 0;
         }
-        Arrays.sort(arr);
-        int lastSmaller = Integer.MIN_VALUE;
-        int cnt = 0;
         int longest = 1;
-        for(int i=0; i<n;i++){
-            if(arr[i] - 1== lastSmaller){
-                cnt++;
-                lastSmaller=arr[i];
+        HashSet<Integer> set = new HashSet<>();
+
+        for(int i=0; i<n; i++){
+            set.add(arr[i]);
+        }
+
+         for (int it : set) {
+
+            // Check if it is the start of a sequence
+            if (!set.contains(it - 1)) {
+
+                int cnt = 1;
+                int x = it;
+
+                // Count consecutive elements
+                while (set.contains(x + 1)) {
+                    x = x + 1;
+                    cnt++;
+                }
+
+                longest = Math.max(longest, cnt);
             }
-            else if(arr[i]==lastSmaller){
-                continue;
-            }
-            else{
-                cnt = 1;
-                lastSmaller=arr[i];
-            }
-             longest = Math.max(longest, cnt);
         }
         return longest;
     }
