@@ -661,59 +661,55 @@ import java.util.*;
 //     }
 // }
 
-public class Darray2 {
 
-    public static int longestSuccessiveEle(int[] arr, int n){
-        if(n==0){
-            return 0;
-        }
-        int longest = 1;
-        HashSet<Integer> set = new HashSet<>();
+// Longest Consecutive Sequence in an Array(Better)
+// public class Darray2 {
 
-        for(int i=0; i<n; i++){
-            set.add(arr[i]);
-        }
+//     public static int longestSuccessiveEle(int[] arr, int n){
+//         Arrays.sort(arr);
+//         int lastSmaller=Integer.MIN_VALUE;
+//         int cnt = 0;
+//         int longest = 1;
+//         for(int i=0; i<n; i++){
+//             if(arr[i]-1 == lastSmaller){
+//                 cnt++;
+//                 lastSmaller=arr[i];
 
-         for (int it : set) {
+//             }
+//             else if(lastSmaller!= arr[i]){
+//                 cnt = 1;
+//                 lastSmaller= arr[i];
+//             }
+//             longest=Math.max(longest,cnt);
 
-            // Check if it is the start of a sequence
-            if (!set.contains(it - 1)) {
+            
+//         }
+//         return longest;
 
-                int cnt = 1;
-                int x = it;
+//     }
+//     public static void main(String[] args) {
 
-                // Count consecutive elements
-                while (set.contains(x + 1)) {
-                    x = x + 1;
-                    cnt++;
-                }
+//         Scanner sc = new Scanner(System.in);
 
-                longest = Math.max(longest, cnt);
-            }
-        }
-        return longest;
-    }
-    public static void main(String[] args) {
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
 
-        Scanner sc = new Scanner(System.in);
+//         int[] arr = new int[n];
 
-        System.out.print("Enter size of array: ");
-        int n = sc.nextInt();
+//         System.out.println("Enter array elements:");
 
-        int[] arr = new int[n];
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
 
-        System.out.println("Enter array elements:");
+//         int ans = longestSuccessiveEle(arr, n);
 
-        for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-        }
+//         System.out.println("Longest Consecutive Sequence Length = " + ans);
 
-        int ans = longestSuccessiveEle(arr, n);
+//         sc.close();
+//     }
+// }
 
-        System.out.println("Longest Consecutive Sequence Length = " + ans);
 
-        sc.close();
-    }
-}
+//Longest Consecutive Sequence in an Array(optimal)
 
-//
