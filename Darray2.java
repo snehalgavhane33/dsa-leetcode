@@ -712,4 +712,42 @@ import java.util.*;
 
 
 //Longest Consecutive Sequence in an Array(optimal)
+public class Darray2{
+    public static int longestSuccessiveEle(int[] arr, int n){
+    HashSet <Integer> st = new HashSet<>();
+    int longest = 1;
+    for(int i=0;i<n;i++){
+        st.add(arr[i]);
+    }
+    for(int it : st){
+        int cnt = 1;
+        int x = it;
+        while(st.contains(x+1)){
+            x=x+1;
+            cnt++;
+        }
+        longest = Math.max(longest,cnt);
+
+    }
+    return longest;
+}
+
+public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+        System.out.println("Enter the elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+         
+        int result = longestSuccessiveEle(arr, n);
+        System.out.println("Longest consecutive sequence length = " + result);
+    }
+
+
+}
 
