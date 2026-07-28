@@ -712,42 +712,100 @@ import java.util.*;
 
 
 //Longest Consecutive Sequence in an Array(optimal)
+// public class Darray2{
+//     public static int longestSuccessiveEle(int[] arr, int n){
+//     HashSet <Integer> st = new HashSet<>();
+//     int longest = 1;
+//     for(int i=0;i<n;i++){
+//         st.add(arr[i]);
+//     }
+//     for(int it : st){
+//         int cnt = 1;
+//         int x = it;
+//         while(st.contains(x+1)){
+//             x=x+1;
+//             cnt++;
+//         }
+//         longest = Math.max(longest,cnt);
+
+//     }
+//     return longest;
+// }
+
+// public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter number of elements: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+//         System.out.println("Enter the elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+         
+//         int result = longestSuccessiveEle(arr, n);
+//         System.out.println("Longest consecutive sequence length = " + result);
+//     }
+
+
+// }
+
+
+//set matrix zeros (btter)
 public class Darray2{
-    public static int longestSuccessiveEle(int[] arr, int n){
-    HashSet <Integer> st = new HashSet<>();
-    int longest = 1;
-    for(int i=0;i<n;i++){
-        st.add(arr[i]);
-    }
-    for(int it : st){
-        int cnt = 1;
-        int x = it;
-        while(st.contains(x+1)){
-            x=x+1;
-            cnt++;
+    public static int[][] matrixZeros(int arr[][], int n, int m){
+        int[] row = new int[n];
+        int[] col = new int[m];
+
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(arr[i][j] == 0){
+                    row[i]=1;
+                    col[j]=1;
+
+                }
+            }
         }
-        longest = Math.max(longest,cnt);
+
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(row[i]==1 || col[j]==1){
+                    arr[i][j]=0;
+                }
+            }
+        }
+        return arr;
 
     }
-    return longest;
-}
 
-public static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter number of elements: ");
+        System.out.print("Enter rows: ");
         int n = sc.nextInt();
 
-        int[] arr = new int[n];
-        System.out.println("Enter the elements:");
+        System.out.print("Enter columns: ");
+        int m = sc.nextInt();
+
+        int[][] arr = new int[n][m];
+        System.out.println("Enter matrix elements:");
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            for (int j = 0; j < m; j++) {
+                arr[i][j] = sc.nextInt();
+            }
         }
-         
-        int result = longestSuccessiveEle(arr, n);
-        System.out.println("Longest consecutive sequence length = " + result);
+
+        int[][] result = matrixZeros(arr, n, m);
+
+        System.out.println("Result matrix:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                System.out.print(result[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+        sc.close();
     }
-
-
 }
-
