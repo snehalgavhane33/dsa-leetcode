@@ -884,51 +884,117 @@ import java.util.*;
 
 
 //Rotate matrix by 90 degree 
-public class Darray2{
-    public static void rotateMatrix(int[][] mat, int n){
-        for(int i=0;i<n-1;i++){
-            for(int j=i+1;j<n;j++){
-                int temp = mat[i][j];
-                mat[i][j]=mat[j][i];
-                mat[j][i]=temp;
+// public class Darray2{
+//     public static void rotateMatrix(int[][] mat, int n){
+//         for(int i=0;i<n-1;i++){
+//             for(int j=i+1;j<n;j++){
+//                 int temp = mat[i][j];
+//                 mat[i][j]=mat[j][i];
+//                 mat[j][i]=temp;
+//             }
+//         }
+//         for(int i=0;i<n;i++){
+//             int left = 0;
+//             int right = n-1;
+//             while(left<right){
+//                 int temp = mat[i][left];
+//                 mat[i][left]=mat[i][right];
+//                 mat[i][right]=temp;
+//                 left++;
+//                 right--;
+//             }
+//         }
+//     }
+//     public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+
+//     System.out.print("Enter matrix size n: ");
+//     int n = sc.nextInt();
+
+//     int[][] mat = new int[n][n];
+//     System.out.println("Enter matrix elements row by row:");
+//     for (int i = 0; i < n; i++) {
+//         for (int j = 0; j < n; j++) {
+//             mat[i][j] = sc.nextInt();
+//         }
+//     }
+
+//     rotateMatrix(mat, n);
+
+//     System.out.println("Rotated matrix:");
+//     for (int i = 0; i < n; i++) {
+//         for (int j = 0; j < n; j++) {
+//             System.out.print(mat[i][j] + " ");
+//         }
+//         System.out.println();
+//     }
+
+//     sc.close();
+// }
+// }
+
+
+//spiral matrix
+public class Darray2 {
+
+    public static List<Integer> spiralMatrix(int arr[][] , int n, int m){
+        List<Integer> ans = new ArrayList<>();
+        int left = 0;
+        int right= m-1;
+        int top =0;
+        int bottom=n-1;
+        while(top<=bottom && left<=right){
+            for(int i=left;i<=right; i++){
+                ans.add(arr[top][i]);
             }
-        }
-        for(int i=0;i<n;i++){
-            int left = 0;
-            int right = n-1;
-            while(left<right){
-                int temp = mat[i][left];
-                mat[i][left]=mat[i][right];
-                mat[i][right]=temp;
+            top++;
+            for(int i=top; i<=bottom;i++){
+                ans.add(arr[i][right]);
+            }
+            right--;
+            if(top<=bottom){
+                for(int i=right; i>=left; i--){
+                    ans.add(arr[bottom][i]);
+                }
+                bottom--;
+            }
+            if(left<=right){
+                for(int i=bottom; i>=top; i--){
+                    ans.add(arr[i][left]);
+                }
                 left++;
-                right--;
             }
         }
+        return ans;
     }
-    public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
 
-    System.out.print("Enter matrix size n: ");
-    int n = sc.nextInt();
+        System.out.println("Enter number of rows");
+        int n = sc.nextInt();
 
-    int[][] mat = new int[n][n];
-    System.out.println("Enter matrix elements row by row:");
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            mat[i][j] = sc.nextInt();
+        System.out.println("Enter number of columns");
+        int m = sc.nextInt();
+
+        int[][] arr = new int[n][m];
+
+        System.out.println("Enter matrix element:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                arr[i][j] = sc.nextInt();
+            }
         }
-    }
 
-    rotateMatrix(mat, n);
+        List<Integer> result = spiralMatrix(arr, n, m);
 
-    System.out.println("Rotated matrix:");
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            System.out.print(mat[i][j] + " ");
+        System.out.println("Spiral Order:");
+
+        for (int num : result) {
+            System.out.print(num + " ");
         }
-        System.out.println();
+
+        sc.close();
     }
 
-    sc.close();
-}
-}
+    }
+
