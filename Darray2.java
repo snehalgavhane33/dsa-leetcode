@@ -812,71 +812,123 @@ import java.util.*;
 
 
 //set matrix zeros (optimal)
-public class Darray2 {
+// public class Darray2 {
 
-    public static int[][] matrixZeros(int arr[][] ,  int n, int m){
-        int col0 = 1;
+//     public static int[][] matrixZeros(int arr[][] ,  int n, int m){
+//         int col0 = 1;
+//         for(int i=0;i<n;i++){
+//             for(int j=0;j<m;j++){
+//                 if(arr[i][j] == 0){
+//                     arr[i][0]=0;
+//                     if(j!=0){
+//                         arr[0][j]=0;
+//                     }else{
+//                         col0=0;
+//                     }
+//                 }
+//             }
+//         }
+//         for(int i=1;i<n;i++){
+//             for(int j=1;j<m;j++ ){
+//                 if(arr[i][0] == 0 || arr[0][j] == 0 ){
+//                     arr[i][j] = 0;
+
+//                 }
+//             }
+//         }
+//         if (arr[0][0] == 0) {
+//             for (int j = 0; j < m; j++) {
+//                 arr[0][j] = 0;
+//             }
+//         }
+
+//         if (col0 == 0) {
+//             for (int i = 0; i < n; i++) {
+//                 arr[i][0] = 0;
+//             }
+//         }
+//         return arr;
+
+//     }
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter rows: ");
+//         int n = sc.nextInt();
+
+//         System.out.print("Enter columns: ");
+//         int m = sc.nextInt();
+
+//         int[][] arr = new int[n][m];
+//         System.out.println("Enter matrix elements:");
+//         for (int i = 0; i < n; i++) {
+//             for (int j = 0; j < m; j++) {
+//                 arr[i][j] = sc.nextInt();
+//             }
+//         }
+
+//         int[][] result = matrixZeros(arr, n, m);
+
+//         System.out.println("Result matrix:");
+//         for (int i = 0; i < n; i++) {
+//             for (int j = 0; j < m; j++) {
+//                 System.out.print(result[i][j] + " ");
+//             }
+//             System.out.println();
+//         }
+
+//         sc.close();
+//     }
+// }
+
+
+
+//Rotate matrix by 90 degree 
+public class Darray2{
+    public static void rotateMatrix(int[][] mat, int n){
+        for(int i=0;i<n-1;i++){
+            for(int j=i+1;j<n;j++){
+                int temp = mat[i][j];
+                mat[i][j]=mat[j][i];
+                mat[j][i]=temp;
+            }
+        }
         for(int i=0;i<n;i++){
-            for(int j=0;j<m;j++){
-                if(arr[i][j] == 0){
-                    arr[i][0]=0;
-                    if(j!=0){
-                        arr[0][j]=0;
-                    }else{
-                        col0=0;
-                    }
-                }
+            int left = 0;
+            int right = n-1;
+            while(left<right){
+                int temp = mat[i][left];
+                mat[i][left]=mat[i][right];
+                mat[i][right]=temp;
+                left++;
+                right--;
             }
         }
-        for(int i=1;i<n;i++){
-            for(int j=1;j<m;j++ ){
-                if(arr[i][0] == 0 || arr[0][j] == 0 ){
-                    arr[i][j] = 0;
-
-                }
-            }
-        }
-        if (arr[0][0] == 0) {
-            for (int j = 0; j < m; j++) {
-                arr[0][j] = 0;
-            }
-        }
-
-        if (col0 == 0) {
-            for (int i = 0; i < n; i++) {
-                arr[i][0] = 0;
-            }
-        }
-        return arr;
-
     }
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter rows: ");
-        int n = sc.nextInt();
+    System.out.print("Enter matrix size n: ");
+    int n = sc.nextInt();
 
-        System.out.print("Enter columns: ");
-        int m = sc.nextInt();
-
-        int[][] arr = new int[n][m];
-        System.out.println("Enter matrix elements:");
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                arr[i][j] = sc.nextInt();
-            }
+    int[][] mat = new int[n][n];
+    System.out.println("Enter matrix elements row by row:");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            mat[i][j] = sc.nextInt();
         }
-
-        int[][] result = matrixZeros(arr, n, m);
-
-        System.out.println("Result matrix:");
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                System.out.print(result[i][j] + " ");
-            }
-            System.out.println();
-        }
-
-        sc.close();
     }
+
+    rotateMatrix(mat, n);
+
+    System.out.println("Rotated matrix:");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            System.out.print(mat[i][j] + " ");
+        }
+        System.out.println();
+    }
+
+    sc.close();
+}
 }
