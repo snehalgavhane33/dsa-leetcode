@@ -935,66 +935,105 @@ import java.util.*;
 
 
 //spiral matrix
+// public class Darray2 {
+
+//     public static List<Integer> spiralMatrix(int arr[][] , int n, int m){
+//         List<Integer> ans = new ArrayList<>();
+//         int left = 0;
+//         int right= m-1;
+//         int top =0;
+//         int bottom=n-1;
+//         while(top<=bottom && left<=right){
+//             for(int i=left;i<=right; i++){
+//                 ans.add(arr[top][i]);
+//             }
+//             top++;
+//             for(int i=top; i<=bottom;i++){
+//                 ans.add(arr[i][right]);
+//             }
+//             right--;
+//             if(top<=bottom){
+//                 for(int i=right; i>=left; i--){
+//                     ans.add(arr[bottom][i]);
+//                 }
+//                 bottom--;
+//             }
+//             if(left<=right){
+//                 for(int i=bottom; i>=top; i--){
+//                     ans.add(arr[i][left]);
+//                 }
+//                 left++;
+//             }
+//         }
+//         return ans;
+//     }
+//     public static void main(String[] args){
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.println("Enter number of rows");
+//         int n = sc.nextInt();
+
+//         System.out.println("Enter number of columns");
+//         int m = sc.nextInt();
+
+//         int[][] arr = new int[n][m];
+
+//         System.out.println("Enter matrix element:");
+//         for (int i = 0; i < n; i++) {
+//             for (int j = 0; j < m; j++) {
+//                 arr[i][j] = sc.nextInt();
+//             }
+//         }
+
+//         List<Integer> result = spiralMatrix(arr, n, m);
+
+//         System.out.println("Spiral Order:");
+
+//         for (int num : result) {
+//             System.out.print(num + " ");
+//         }
+
+//         sc.close();
+//     }
+
+//     }
+
+
+//count subarray sum equals to k(better)
 public class Darray2 {
 
-    public static List<Integer> spiralMatrix(int arr[][] , int n, int m){
-        List<Integer> ans = new ArrayList<>();
-        int left = 0;
-        int right= m-1;
-        int top =0;
-        int bottom=n-1;
-        while(top<=bottom && left<=right){
-            for(int i=left;i<=right; i++){
-                ans.add(arr[top][i]);
-            }
-            top++;
-            for(int i=top; i<=bottom;i++){
-                ans.add(arr[i][right]);
-            }
-            right--;
-            if(top<=bottom){
-                for(int i=right; i>=left; i--){
-                    ans.add(arr[bottom][i]);
+    public static int subarray(int arr[], int n, int k){
+        int cnt=0;
+        for(int i=0;i<n;i++){
+            int sum =0;
+
+            for(int j=i; j<n; j++){
+                sum += arr[j];
+                if(sum==k){
+                    cnt++;
                 }
-                bottom--;
-            }
-            if(left<=right){
-                for(int i=bottom; i>=top; i--){
-                    ans.add(arr[i][left]);
-                }
-                left++;
             }
         }
-        return ans;
+        return cnt;
     }
     public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
+        Scanner sc= new Scanner(System.in);
 
-        System.out.println("Enter number of rows");
+        System.out.print("Enter the size of the array: ");
         int n = sc.nextInt();
 
-        System.out.println("Enter number of columns");
-        int m = sc.nextInt();
-
-        int[][] arr = new int[n][m];
-
-        System.out.println("Enter matrix element:");
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                arr[i][j] = sc.nextInt();
-            }
+        int arr[] = new int[n];
+        
+        System.out.println("Enter the elements of the array:");
+        for(int i =0; i<n; i++){
+            arr[i] = sc.nextInt();
         }
 
-        List<Integer> result = spiralMatrix(arr, n, m);
+        System.out.println("Enter value of k");
+        int k = sc.nextInt();
 
-        System.out.println("Spiral Order:");
+        int ans = subarray(arr, n, k);
+        System.out.println("Number of arrays with sum " + k + "=" + ans);
 
-        for (int num : result) {
-            System.out.print(num + " ");
-        }
-
-        sc.close();
-    }
-
-    }
-
+}
+}
