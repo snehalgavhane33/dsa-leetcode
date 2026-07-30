@@ -1039,36 +1039,36 @@ import java.util.*;
 // }
 
 //count subarray sum equals to k(optimal)
-public class Darray2 {
-    public static int subarray(int arr[] , int n, int k){
-        HashMap <Integer , Integer> map = new HashMap<>();
-        map.put(0,1);
-        int preSum=0;
-        int cnt=0;
-        for(int i=0; i<n; i++){
-            preSum += arr[i];
-            int remove  = preSum - k;
-            cnt += map.getOrDefault(remove,0);
-            map.put(preSum,map.getOrDefault(preSum,0 ) + 1);
+// public class Darray2 {
+//     public static int subarray(int arr[] , int n, int k){
+//         HashMap <Integer , Integer> map = new HashMap<>();
+//         map.put(0,1);
+//         int preSum=0;
+//         int cnt=0;
+//         for(int i=0; i<n; i++){
+//             preSum += arr[i];
+//             int remove  = preSum - k;
+//             cnt += map.getOrDefault(remove,0);
+//             map.put(preSum,map.getOrDefault(preSum,0 ) + 1);
 
-    }
-    return cnt;
+//     }
+//     return cnt;
 
-    }
-     public static void main(String[] args){
-        Scanner sc= new Scanner(System.in);
+//     }
+//      public static void main(String[] args){
+//         Scanner sc= new Scanner(System.in);
 
-        System.out.print("Enter the size of the array: ");
-        int n = sc.nextInt();
+//         System.out.print("Enter the size of the array: ");
+//         int n = sc.nextInt();
 
-        int arr[] = new int[n];
+//         int arr[] = new int[n];
         
-        System.out.println("Enter the elements of the array:");
-        for(int i =0; i<n; i++){
-            arr[i] = sc.nextInt();
-        }
-        System.out.print("Enter value of k: ");
-        int k = sc.nextInt();
-        System.out.println("Number of subarrays with sum " + k + " = " + subarray(arr, n, k));
-     }
-}
+//         System.out.println("Enter the elements of the array:");
+//         for(int i =0; i<n; i++){
+//             arr[i] = sc.nextInt();
+//         }
+//         System.out.print("Enter value of k: ");
+//         int k = sc.nextInt();
+//         System.out.println("Number of subarrays with sum " + k + " = " + subarray(arr, n, k));
+//      }
+// }
