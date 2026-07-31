@@ -2,7 +2,6 @@
 
 
 //pascal triangle : given R & C print specific no.
-import java.util.Scanner;
 import java.util.*;
 
 // public class Darray3{
@@ -37,23 +36,64 @@ import java.util.*;
 // }
 
 //pascal triangle : print entire row
-public class Darray3 {
+// public class Darray3 {
 
-    public static void printRow(int n){
-        int ans = 1;
-        System.out.println(ans + " ");
-        for(int i=1; i<n; i++){
-            ans = ans * (n-i);
-            ans = ans/i;
-            System.out.println(ans + "  ");
-        }
-    } 
-     public static void main(String[] args) {
-        Scanner sc= new Scanner(System.in);
+//     public static void printRow(int n){
+//         int ans = 1;
+//         System.out.println(ans + " ");
+//         for(int i=1; i<n; i++){
+//             ans = ans * (n-i);
+//             ans = ans/i;
+//             System.out.println(ans + "  ");
+//         }
+//     } 
+//      public static void main(String[] args) {
+//         Scanner sc= new Scanner(System.in);
 
         
-        System.out.print("Enter row number: ");
-        int n = sc.nextInt();
-        printRow(n);
+//         System.out.print("Enter row number: ");
+//         int n = sc.nextInt();
+//         printRow(n);
+// }
+// }   
+
+//pascal triangle : print entire triangle
+public class Darray3 {
+
+    public static int nCr(int n, int r){
+    int ans = 1;
+    for(int i=0; i<r; i++){
+        ans = ans * (n-i);
+        ans = ans / (i+1);
+
+    }
+    return ans;
+    
 }
-}   
+
+public static ArrayList<ArrayList<Integer>> pascalTriangle(int n){
+    ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+    for(int row=1; row<=n; row++){
+        ArrayList<Integer> temp = new ArrayList<>();
+        for(int col=1; col<=row; col++){
+            temp.add(nCr(row-1 ,col-1));
+        }
+        ans.add(temp);
+    }
+    return ans;
+}
+
+    public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    System.out.print("Enter number of rows: ");
+    int n = sc.nextInt();
+    ArrayList<ArrayList<Integer>> triangle = pascalTriangle(n);
+    for (ArrayList<Integer> row : triangle) {
+        for (int num : row) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+    sc.close();
+}
+}
