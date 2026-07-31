@@ -58,42 +58,78 @@ import java.util.*;
 // }   
 
 //pascal triangle : print entire triangle
+// public class Darray3 {
+
+//     public static int nCr(int n, int r){
+//     int ans = 1;
+//     for(int i=0; i<r; i++){
+//         ans = ans * (n-i);
+//         ans = ans / (i+1);
+
+//     }
+//     return ans;
+    
+// }
+
+// public static ArrayList<ArrayList<Integer>> pascalTriangle(int n){
+//     ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+//     for(int row=1; row<=n; row++){
+//         ArrayList<Integer> temp = new ArrayList<>();
+//         for(int col=1; col<=row; col++){
+//             temp.add(nCr(row-1 ,col-1));
+//         }
+//         ans.add(temp);
+//     }
+//     return ans;
+// }
+
+//     public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+//     System.out.print("Enter number of rows: ");
+//     int n = sc.nextInt();
+//     ArrayList<ArrayList<Integer>> triangle = pascalTriangle(n);
+//     for (ArrayList<Integer> row : triangle) {
+//         for (int num : row) {
+//             System.out.print(num + " ");
+//         }
+//         System.out.println();
+//     }
+//     sc.close();
+// }
+// }
+
+
+//majority element (n/3) better
 public class Darray3 {
 
-    public static int nCr(int n, int r){
-    int ans = 1;
-    for(int i=0; i<r; i++){
-        ans = ans * (n-i);
-        ans = ans / (i+1);
+    public static List<Integer> majorityEle(int arr[] , int n){
+        HashMap<Integer,Integer> map = new HashMap<>();
+        List<Integer> ans = new ArrayList<>();
+        int min = (n/3)+1;
 
-    }
-    return ans;
-    
-}
-
-public static ArrayList<ArrayList<Integer>> pascalTriangle(int n){
-    ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
-    for(int row=1; row<=n; row++){
-        ArrayList<Integer> temp = new ArrayList<>();
-        for(int col=1; col<=row; col++){
-            temp.add(nCr(row-1 ,col-1));
+        for(int i=0; i<n; i++){
+            map.put(arr[i], map.getOrDefault(arr[i],0)+1 );
+            if(map.get(arr[i])==min){
+                ans.add(arr[i]);
+            }
+            if(ans.size()==2) break;
         }
-        ans.add(temp);
+        Collections.sort(ans);
+        return ans;
     }
-    return ans;
-}
+     public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
 
-    public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    System.out.print("Enter number of rows: ");
-    int n = sc.nextInt();
-    ArrayList<ArrayList<Integer>> triangle = pascalTriangle(n);
-    for (ArrayList<Integer> row : triangle) {
-        for (int num : row) {
-            System.out.print(num + " ");
+        System.out.print("Enter size of array: ");
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+
+        System.out.println("Enter array elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
         }
-        System.out.println();
+         List<Integer> ans1 = majorityEle(arr, n);
+         System.out.println("Majority Elements (> n/3 times): " + ans1);
     }
-    sc.close();
-}
 }
