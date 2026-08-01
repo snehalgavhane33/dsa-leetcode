@@ -135,68 +135,115 @@ import java.util.*;
 // }
 
 //majority element (n/3) better
+// public class Darray3 {
+
+//      public static List<Integer> majorityEle(int[] nums, int n){
+//         int cnt1=0,cnt2=0;
+//         int ele1 = Integer.MAX_VALUE;
+//         int ele2 = Integer.MIN_VALUE;
+
+//         for(int i=0; i<n; i++){
+//             if(cnt1==0 && nums[i] != ele2){
+//                 cnt1 = 1;
+//                 ele1 = nums[i];
+
+//             }
+//             else if(cnt2==00 && nums[i] != ele1){
+//                 cnt2 = 1;
+//                 ele2 = nums[i];
+//             }
+//             else if(nums[i] == ele1){
+//                 cnt1++;
+//             }
+//             else if(nums[i] == ele2){
+//                 cnt2++;
+//             }
+//             else{
+//                 cnt1--;
+//                 cnt2--;
+//             }
+//         }
+//         cnt1 = 0;
+//         cnt2 = 0;
+
+//         for(int i=0; i<n; i++){
+//             if(nums[i]==ele1){
+//                 cnt1++;
+//             }
+//             else if(nums[i]==ele2){
+//                 cnt2++;
+//             }
+//         }
+//         List<Integer> ans = new ArrayList<>();
+//         int min = (n/3)+1;
+
+//         if(cnt1>= min)
+//             ans.add(ele1);
+//         if(cnt2>=min)
+//             ans.add(ele2);
+//         return ans;
+    
+//  }
+//   public static void main(String[] args) {
+//         Scanner sc= new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] nums = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             nums[i] = sc.nextInt();
+//         }
+//          List<Integer> ans = majorityEle(nums, n);
+//          System.out.println("Majority Elements (> n/3 times): " + ans);
+//     }
+// }
+
+
+//sum 3 better
 public class Darray3 {
 
-     public static List<Integer> majorityEle(int[] nums, int n){
-        int cnt1=0,cnt2=0;
-        int ele1 = Integer.MAX_VALUE;
-        int ele2 = Integer.MIN_VALUE;
-
+    public static List<List<Integer>> threeSum(int arr[], int n){
+        Set<List<Integer>> st = new HashSet<>();
         for(int i=0; i<n; i++){
-            if(cnt1==0 && nums[i] != ele2){
-                cnt1 = 1;
-                ele1 = nums[i];
+            HashSet<Integer> hashSet = new HashSet<>();
+            for(int j=i+1; j<n; j++){
+                int third = -(arr[i]+arr[j]);
+                if(hashSet.contains(third)){
+                     List<Integer> temp = new ArrayList<>();
+                     temp.add(arr[i]);
+                     temp.add(arr[j]);
+                     temp.add(third);
+                     Collections.sort(temp);
+                     st.add(temp);
 
-            }
-            else if(cnt2==00 && nums[i] != ele1){
-                cnt2 = 1;
-                ele2 = nums[i];
-            }
-            else if(nums[i] == ele1){
-                cnt1++;
-            }
-            else if(nums[i] == ele2){
-                cnt2++;
-            }
-            else{
-                cnt1--;
-                cnt2--;
+                     
+                }
+                hashSet.add(arr[j]);
             }
         }
-        cnt1 = 0;
-        cnt2 = 0;
+        return new ArrayList<>(st);
+    }
 
-        for(int i=0; i<n; i++){
-            if(nums[i]==ele1){
-                cnt1++;
-            }
-            else if(nums[i]==ele2){
-                cnt2++;
-            }
-        }
-        List<Integer> ans = new ArrayList<>();
-        int min = (n/3)+1;
-
-        if(cnt1>= min)
-            ans.add(ele1);
-        if(cnt2>=min)
-            ans.add(ele2);
-        return ans;
-    
- }
-  public static void main(String[] args) {
+     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
 
         System.out.print("Enter size of array: ");
         int n = sc.nextInt();
 
-        int[] nums = new int[n];
+        int[] arr = new int[n];
 
         System.out.println("Enter array elements:");
         for (int i = 0; i < n; i++) {
-            nums[i] = sc.nextInt();
+            arr[i] = sc.nextInt();
         }
-         List<Integer> ans = majorityEle(nums, n);
-         System.out.println("Majority Elements (> n/3 times): " + ans);
+
+        List<List<Integer>> ans1 = threeSum(arr, n);
+        System.out.println("Triplets are:");
+        for (List<Integer> list : ans1) {
+            System.out.println(list);
+        }
     }
 }
