@@ -203,28 +203,88 @@ import java.util.*;
 
 
 //sum 3 better
+// public class Darray3 {
+
+//     public static List<List<Integer>> threeSum(int arr[], int n){
+//         Set<List<Integer>> st = new HashSet<>();
+//         for(int i=0; i<n; i++){
+//             HashSet<Integer> hashSet = new HashSet<>();
+//             for(int j=i+1; j<n; j++){
+//                 int third = -(arr[i]+arr[j]);
+//                 if(hashSet.contains(third)){
+//                      List<Integer> temp = new ArrayList<>();
+//                      temp.add(arr[i]);
+//                      temp.add(arr[j]);
+//                      temp.add(third);
+//                      Collections.sort(temp);
+//                      st.add(temp);
+
+                     
+//                 }
+//                 hashSet.add(arr[j]);
+//             }
+//         }
+//         return new ArrayList<>(st);
+//     }
+
+//      public static void main(String[] args) {
+//         Scanner sc= new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         List<List<Integer>> ans1 = threeSum(arr, n);
+//         System.out.println("Triplets are:");
+//         for (List<Integer> list : ans1) {
+//             System.out.println(list);
+//         }
+//     }
+// }
+
+
+//sum 3 optimal
 public class Darray3 {
 
     public static List<List<Integer>> threeSum(int arr[], int n){
-        Set<List<Integer>> st = new HashSet<>();
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(arr);
         for(int i=0; i<n; i++){
-            HashSet<Integer> hashSet = new HashSet<>();
-            for(int j=i+1; j<n; j++){
-                int third = -(arr[i]+arr[j]);
-                if(hashSet.contains(third)){
-                     List<Integer> temp = new ArrayList<>();
-                     temp.add(arr[i]);
-                     temp.add(arr[j]);
-                     temp.add(third);
-                     Collections.sort(temp);
-                     st.add(temp);
+            if(i>0 && arr[i]==arr[i-1]) continue;
+            int j = i+1;
+            int k = n-1;
+            while(j<k){
+                int sum = arr[i]+arr[j]+arr[k];
 
-                     
+                if(sum<0){
+                    j++;
                 }
-                hashSet.add(arr[j]);
+                else if(sum>0){
+                    k--;
+                }
+                else{
+                    List<Integer> temp = new ArrayList<>();
+                    temp.add(arr[i]);
+                    temp.add(arr[j]);
+                    temp.add(arr[k]);
+
+                    ans.add(temp);
+                    j++;
+                    k--;
+
+                    while(j<k && arr[j] == arr[j-1]) j++;
+                    while(j<k && arr[k] == arr[k+1]) k--;
+                }
             }
         }
-        return new ArrayList<>(st);
+        return ans;
+        
     }
 
      public static void main(String[] args) {
@@ -240,9 +300,9 @@ public class Darray3 {
             arr[i] = sc.nextInt();
         }
 
-        List<List<Integer>> ans1 = threeSum(arr, n);
+          List<List<Integer>> ans2 = threeSum(arr, n);
         System.out.println("Triplets are:");
-        for (List<Integer> list : ans1) {
+        for (List<Integer> list : ans2) {
             System.out.println(list);
         }
     }
