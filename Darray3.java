@@ -250,41 +250,91 @@ import java.util.*;
 
 
 //sum 3 optimal
-public class Darray3 {
+// public class Darray3 {
 
-    public static List<List<Integer>> threeSum(int arr[], int n){
-        List<List<Integer>> ans = new ArrayList<>();
-        Arrays.sort(arr);
+//     public static List<List<Integer>> threeSum(int arr[], int n){
+//         List<List<Integer>> ans = new ArrayList<>();
+//         Arrays.sort(arr);
+//         for(int i=0; i<n; i++){
+//             if(i>0 && arr[i]==arr[i-1]) continue;
+//             int j = i+1;
+//             int k = n-1;
+//             while(j<k){
+//                 int sum = arr[i]+arr[j]+arr[k];
+
+//                 if(sum<0){
+//                     j++;
+//                 }
+//                 else if(sum>0){
+//                     k--;
+//                 }
+//                 else{
+//                     List<Integer> temp = new ArrayList<>();
+//                     temp.add(arr[i]);
+//                     temp.add(arr[j]);
+//                     temp.add(arr[k]);
+
+//                     ans.add(temp);
+//                     j++;
+//                     k--;
+
+//                     while(j<k && arr[j] == arr[j-1]) j++;
+//                     while(j<k && arr[k] == arr[k+1]) k--;
+//                 }
+//             }
+//         }
+//         return ans;
+        
+//     }
+
+//      public static void main(String[] args) {
+//         Scanner sc= new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//           List<List<Integer>> ans2 = threeSum(arr, n);
+//         System.out.println("Triplets are:");
+//         for (List<Integer> list : ans2) {
+//             System.out.println(list);
+//         }
+//     }
+// }
+
+
+//4 sum better 
+public class Darray3{
+    public static List<List<Integer>> fourSum(int arr[], int n, int target){
+        Set<List<Integer>> st = new HashSet<>();
         for(int i=0; i<n; i++){
-            if(i>0 && arr[i]==arr[i-1]) continue;
-            int j = i+1;
-            int k = n-1;
-            while(j<k){
-                int sum = arr[i]+arr[j]+arr[k];
+            for(int j=i+1; j<n; j++){
+                HashSet<Long> hashSet = new HashSet<>();
+                for(int k=j+1; k<n; k++){
+                    long sum = arr[i]+arr[j]+arr[k];
+                    long fourth = target - sum;
 
-                if(sum<0){
-                    j++;
-                }
-                else if(sum>0){
-                    k--;
-                }
-                else{
-                    List<Integer> temp = new ArrayList<>();
-                    temp.add(arr[i]);
-                    temp.add(arr[j]);
-                    temp.add(arr[k]);
+                    if(hashSet.contains(fourth)){
+                        List<Integer> temp = new ArrayList<>();
+                        temp.add(arr[i]);
+                        temp.add(arr[j]);
+                        temp.add(arr[k]);
+                        temp.add((int)fourth);
 
-                    ans.add(temp);
-                    j++;
-                    k--;
-
-                    while(j<k && arr[j] == arr[j-1]) j++;
-                    while(j<k && arr[k] == arr[k+1]) k--;
+                        Collections.sort(temp);
+                        st.add(temp);
+                    }
+                    hashSet.add((long)arr[k]);
                 }
             }
         }
-        return ans;
-        
+        return new ArrayList<>(st);
     }
 
      public static void main(String[] args) {
@@ -300,10 +350,12 @@ public class Darray3 {
             arr[i] = sc.nextInt();
         }
 
-          List<List<Integer>> ans2 = threeSum(arr, n);
-        System.out.println("Triplets are:");
-        for (List<Integer> list : ans2) {
+        System.out.print("Enter target: ");
+        int target = sc.nextInt();
+        List<List<Integer>> ans = fourSum(arr,n, target);
+        System.out.println("Quadruplets are:");
+        for (List<Integer> list : ans) {
             System.out.println(list);
         }
-    }
+     }
 }
