@@ -473,21 +473,58 @@ import java.util.*;
 
 
 //Count subarray with given xor k (better)
-public class Darray3{
+// public class Darray3{
+//     public static int maxSubArray(int arr[], int n, int k){
+//         int cnt = 0;
+//         for(int i=0; i<n; i++){
+//             int xor = 0;
+//             for(int j=i; j<n; j++){
+//                 xor = xor ^ arr[j];
+//                 if(xor==k) cnt++;
+//             }
+//         }
+//         return cnt;
+
+//     }
+
+//      public static void main(String[] args) {
+//         Scanner sc= new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         System.out.print("Enter value of K: ");
+//         int k = sc.nextInt();
+//         System.out.println("Number of subarrays with XOR " + k + " = " + maxSubArray(arr, n, k));
+//      }
+// }
+
+//Count subarray with given xor k (optimal)
+public class Darray3 {
+
     public static int maxSubArray(int arr[], int n, int k){
+        HashMap<Integer, Integer> mpp = new HashMap<>();
+        int xr = 0;
         int cnt = 0;
+        mpp.put(0, 1);
         for(int i=0; i<n; i++){
-            int xor = 0;
-            for(int j=i; j<n; j++){
-                xor = xor ^ arr[j];
-                if(xor==k) cnt++;
-            }
+            xr = xr ^ arr[i];
+            int x = xr ^k;
+            cnt += mpp.getOrDefault(x,0 );
+            mpp.put(xr,mpp.getOrDefault(xr,0)+1);
+
         }
         return cnt;
-
     }
 
-     public static void main(String[] args) {
+      public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
 
         System.out.print("Enter size of array: ");
@@ -501,7 +538,8 @@ public class Darray3{
         }
 
         System.out.print("Enter value of K: ");
-        int k = sc.nextInt();
+         int k = sc.nextInt();
         System.out.println("Number of subarrays with XOR " + k + " = " + maxSubArray(arr, n, k));
-     }
+
+    }
 }
