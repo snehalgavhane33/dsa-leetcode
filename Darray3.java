@@ -362,46 +362,98 @@ import java.util.*;
 
 
 //4 sum optimal
-public class Darray3 {
+// public class Darray3 {
 
-    public static List<List<Integer>> fourSum(int arr[], int n, int target){
-        List<List<Integer>> ans = new ArrayList<>();
-        Arrays.sort(arr);
+//     public static List<List<Integer>> fourSum(int arr[], int n, int target){
+//         List<List<Integer>> ans = new ArrayList<>();
+//         Arrays.sort(arr);
 
+//         for(int i=0; i<n; i++){
+//             if(i>0 && arr[i]==arr[i-1]) continue;
+//             for(int j=i+1; j<n; j++){
+//                 if(j>i+1 && arr[j]==arr[j-1]) continue;
+
+//                 int k = j+1;
+//                 int l = n-1;
+
+//                 while(k<l){
+//                     long sum = 0;
+//                     sum+=arr[i];
+//                     sum+=arr[j];
+//                     sum+=arr[k];
+//                     sum+=arr[l];
+
+//                     if(sum == target){
+//                         ans.add(Arrays.asList(arr[i],arr[j],arr[k],arr[l]));
+//                         k++;
+//                         l--;
+
+//                         while(k<l && arr[k]==arr[k-1]) k++;
+//                         while(k<l && arr[l]==arr[l+1]) l--;
+//                     }
+//                     else if(sum<target) k++;
+//                     else {
+//                         l--;
+//                     }
+//                 }
+//             }
+//         }
+//         return ans;
+//     }
+
+//      public static void main(String[] args) {
+//         Scanner sc= new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         System.out.print("Enter target: ");
+//         int target = sc.nextInt();
+//         List<List<Integer>> ans = fourSum(arr, n, target);
+//         System.out.println("Quadruplets are:");
+//         if (ans.isEmpty()) {
+//             System.out.println("No quadruplets found.");
+//         } else {
+//             for (List<Integer> list : ans) {
+//                 System.out.println(list);
+//             }
+//         }
+//      }
+// }
+
+
+//Largest subarray with sum 0
+public class Darray3{
+    public static int maxLen(int arr[], int n){
+        HashMap<Integer,Integer> mpp = new HashMap<>();
+        int maxi = 0;
+        int sum = 0;
         for(int i=0; i<n; i++){
-            if(i>0 && arr[i]==arr[i-1]) continue;
-            for(int j=i+1; j<n; j++){
-                if(j>i+1 && arr[j]==arr[j-1]) continue;
+            sum += arr[i];
 
-                int k = j+1;
-                int l = n-1;
-
-                while(k<l){
-                    long sum = 0;
-                    sum+=arr[i];
-                    sum+=arr[j];
-                    sum+=arr[k];
-                    sum+=arr[l];
-
-                    if(sum == target){
-                        ans.add(Arrays.asList(arr[i],arr[j],arr[k],arr[l]));
-                        k++;
-                        l--;
-
-                        while(k<l && arr[k]==arr[k-1]) k++;
-                        while(k<l && arr[l]==arr[l+1]) l--;
-                    }
-                    else if(sum<target) k++;
-                    else {
-                        l--;
-                    }
+            if(sum==0){
+                maxi = i+1;
+            }
+            else{
+                if(mpp.get(sum)!=null){
+                    maxi = Math.max(maxi, i-mpp.get(sum));
+                }
+                else{
+                    mpp.put(sum,i);
                 }
             }
         }
-        return ans;
+        return maxi;
     }
 
-     public static void main(String[] args) {
+      public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
 
         System.out.print("Enter size of array: ");
@@ -413,17 +465,10 @@ public class Darray3 {
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
+        System.out.println("Length of longest subarray with sum 0 = " + maxLen(arr, n));
 
-        System.out.print("Enter target: ");
-        int target = sc.nextInt();
-        List<List<Integer>> ans = fourSum(arr, n, target);
-        System.out.println("Quadruplets are:");
-        if (ans.isEmpty()) {
-            System.out.println("No quadruplets found.");
-        } else {
-            for (List<Integer> list : ans) {
-                System.out.println(list);
-            }
-        }
-     }
+
+      }
 }
+
+
