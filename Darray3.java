@@ -430,30 +430,64 @@ import java.util.*;
 
 
 //Largest subarray with sum 0
-public class Darray3{
-    public static int maxLen(int arr[], int n){
-        HashMap<Integer,Integer> mpp = new HashMap<>();
-        int maxi = 0;
-        int sum = 0;
-        for(int i=0; i<n; i++){
-            sum += arr[i];
+// public class Darray3{
+//     public static int maxLen(int arr[], int n){
+//         HashMap<Integer,Integer> mpp = new HashMap<>();
+//         int maxi = 0;
+//         int sum = 0;
+//         for(int i=0; i<n; i++){
+//             sum += arr[i];
 
-            if(sum==0){
-                maxi = i+1;
-            }
-            else{
-                if(mpp.get(sum)!=null){
-                    maxi = Math.max(maxi, i-mpp.get(sum));
-                }
-                else{
-                    mpp.put(sum,i);
-                }
+//             if(sum==0){
+//                 maxi = i+1;
+//             }
+//             else{
+//                 if(mpp.get(sum)!=null){
+//                     maxi = Math.max(maxi, i-mpp.get(sum));
+//                 }
+//                 else{
+//                     mpp.put(sum,i);
+//                 }
+//             }
+//         }
+//         return maxi;
+//     }
+
+//       public static void main(String[] args) {
+//         Scanner sc= new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+//         System.out.println("Length of longest subarray with sum 0 = " + maxLen(arr, n));
+
+
+//       }
+// }
+
+
+//Count subarray with given xor k (better)
+public class Darray3{
+    public static int maxSubArray(int arr[], int n, int k){
+        int cnt = 0;
+        for(int i=0; i<n; i++){
+            int xor = 0;
+            for(int j=i; j<n; j++){
+                xor = xor ^ arr[j];
+                if(xor==k) cnt++;
             }
         }
-        return maxi;
+        return cnt;
+
     }
 
-      public static void main(String[] args) {
+     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
 
         System.out.print("Enter size of array: ");
@@ -465,10 +499,9 @@ public class Darray3{
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
-        System.out.println("Length of longest subarray with sum 0 = " + maxLen(arr, n));
 
-
-      }
+        System.out.print("Enter value of K: ");
+        int k = sc.nextInt();
+        System.out.println("Number of subarrays with XOR " + k + " = " + maxSubArray(arr, n, k));
+     }
 }
-
-
