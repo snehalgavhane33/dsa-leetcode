@@ -507,39 +507,87 @@ import java.util.*;
 // }
 
 //Count subarray with given xor k (optimal)
+// public class Darray3 {
+
+//     public static int maxSubArray(int arr[], int n, int k){
+//         HashMap<Integer, Integer> mpp = new HashMap<>();
+//         int xr = 0;
+//         int cnt = 0;
+//         mpp.put(0, 1);
+//         for(int i=0; i<n; i++){
+//             xr = xr ^ arr[i];
+//             int x = xr ^k;
+//             cnt += mpp.getOrDefault(x,0 );
+//             mpp.put(xr,mpp.getOrDefault(xr,0)+1);
+
+//         }
+//         return cnt;
+//     }
+
+//       public static void main(String[] args) {
+//         Scanner sc= new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         System.out.print("Enter value of K: ");
+//          int k = sc.nextInt();
+//         System.out.println("Number of subarrays with XOR " + k + " = " + maxSubArray(arr, n, k));
+
+//     }
+// }
+
+
+
+// Merge overlapping subintervals(brute)
 public class Darray3 {
 
-    public static int maxSubArray(int arr[], int n, int k){
-        HashMap<Integer, Integer> mpp = new HashMap<>();
-        int xr = 0;
-        int cnt = 0;
-        mpp.put(0, 1);
+    public static List<List<Integer>> mergeSubIntervals(int[][] arr){
+        int n = arr.length;
+        Arrays.sort(arr,(a,b)-> Integer.compare(a[0],b[0]));
+
+        List<List<Integer>> ans = new ArrayList<>();
         for(int i=0; i<n; i++){
-            xr = xr ^ arr[i];
-            int x = xr ^k;
-            cnt += mpp.getOrDefault(x,0 );
-            mpp.put(xr,mpp.getOrDefault(xr,0)+1);
+            int start = arr[i][0];
+            int end = arr[i][1];
 
+            if(!ans.isEmpty() && end<= ans.get(ans.size() - 1).get(1)) continue;
+
+            for(int j=i+1; j<n; j++){
+                if(arr[j][0]<=end){
+                    end = Math.max(end,arr[j][1]);
+                }else{
+                    break;
+                }
+            }
+            ans.add(Arrays.asList(start,end));
         }
-        return cnt;
+        return ans;
     }
-
-      public static void main(String[] args) {
+    
+    public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
-
-        System.out.print("Enter size of array: ");
+        
+        System.out.print("Enter number of intervals: ");
         int n = sc.nextInt();
-
-        int[] arr = new int[n];
-
-        System.out.println("Enter array elements:");
+        int[][] arr = new int[n][2];
+        System.out.println("Enter intervals:");
         for (int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
+            arr[i][0] = sc.nextInt();
+            arr[i][1] = sc.nextInt();
         }
-
-        System.out.print("Enter value of K: ");
-         int k = sc.nextInt();
-        System.out.println("Number of subarrays with XOR " + k + " = " + maxSubArray(arr, n, k));
-
+        List<List<Integer>> ans = mergeSubIntervals(arr);
+        System.out.println("Merged Intervals:");
+        for (List<Integer> interval : ans) {
+            System.out.println(interval);
+        }
     }
+
 }
