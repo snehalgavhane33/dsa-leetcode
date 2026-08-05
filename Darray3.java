@@ -593,43 +593,90 @@ import java.util.*;
 // }
 
 // Merge overlapping subintervals(optimal)
-public class Darray3 {
+// public class Darray3 {
 
-    public static int[][] mergeInterval(int[][] arr){
-        Arrays.sort(arr,(a,b)->Integer.compare(a[0],b[0]));
-        List<int[]> ans = new ArrayList<>();
-        for(int i=0; i<arr.length; i++){
-            if(ans.isEmpty() || arr[i][0]>ans.get(ans.size()-1)[1]){
-                ans.add(new int[]{arr[i][0],arr[i][1]});
+//     public static int[][] mergeInterval(int[][] arr){
+//         Arrays.sort(arr,(a,b)->Integer.compare(a[0],b[0]));
+//         List<int[]> ans = new ArrayList<>();
+//         for(int i=0; i<arr.length; i++){
+//             if(ans.isEmpty() || arr[i][0]>ans.get(ans.size()-1)[1]){
+//                 ans.add(new int[]{arr[i][0],arr[i][1]});
+//             }
+//             else{
+//                ans.get(ans.size() - 1)[1] =
+//                         Math.max(ans.get(ans.size() - 1)[1], arr[i][1]);
+//             }
+//         }
+//           return ans.toArray(new int[ans.size()][]);
+//     }
+//     public static void main(String[] args) {
+//     Scanner sc = new Scanner(System.in);
+
+//     System.out.print("Enter number of intervals: ");
+//     int n = sc.nextInt();
+
+//     int[][] arr = new int[n][2];
+
+//     System.out.println("Enter the intervals (start end):");
+//     for (int i = 0; i < n; i++) {
+//         arr[i][0] = sc.nextInt(); // Start
+//         arr[i][1] = sc.nextInt(); // End
+//     }
+
+//     int[][] ans = mergeInterval(arr);
+
+//     System.out.println("Merged Intervals:");
+//     for (int i = 0; i < ans.length; i++) {
+//         System.out.println(ans[i][0] + " " + ans[i][1]);
+//     }
+
+//     sc.close();
+// }
+// }
+
+
+//Merge two sorted arrays without extra space(better)
+public class Darray3{
+    public static void merge(long[] arr1, long[] arr2){
+        int n = arr1.length;
+        int m = arr2.length;
+        int left = n-1;
+        int right = 0;
+        while(left>=0 && right<m){
+            if(arr1[left]>arr2[right]){
+                long temp = arr1[left];
+                arr1[left]=arr2[right];
+                arr2[right]=temp;
+                left--;
+                right++;
             }
             else{
-               ans.get(ans.size() - 1)[1] =
-                        Math.max(ans.get(ans.size() - 1)[1], arr[i][1]);
+                break;
             }
         }
-          return ans.toArray(new int[ans.size()][]);
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
     }
     public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-
-    System.out.print("Enter number of intervals: ");
-    int n = sc.nextInt();
-
-    int[][] arr = new int[n][2];
-
-    System.out.println("Enter the intervals (start end):");
-    for (int i = 0; i < n; i++) {
-        arr[i][0] = sc.nextInt(); // Start
-        arr[i][1] = sc.nextInt(); // End
+        Scanner sc = new Scanner(System.in);
+         System.out.print("Enter size of first array: ");
+        int n = sc.nextInt();
+        System.out.print("Enter size of second array: ");
+        int m = sc.nextInt();
+        long[] arr1 = new long[n];
+        long[] arr2 = new long[m];
+        System.out.println("Enter elements of first sorted array:");
+        for (int i = 0; i < n; i++) {
+            arr1[i] = sc.nextLong();
+        }
+        System.out.println("Enter elements of second sorted array:");
+        for (int i = 0; i < m; i++) {
+            arr2[i] = sc.nextLong();
+        }
+        merge(arr1, arr2);
+        System.out.println("First Array after merge:");
+        System.out.println(Arrays.toString(arr1));
+        System.out.println("Second Array after merge:");
+        System.out.println(Arrays.toString(arr2));
     }
-
-    int[][] ans = mergeInterval(arr);
-
-    System.out.println("Merged Intervals:");
-    for (int i = 0; i < ans.length; i++) {
-        System.out.println(ans[i][0] + " " + ans[i][1]);
-    }
-
-    sc.close();
-}
 }
