@@ -636,30 +636,88 @@ import java.util.*;
 
 
 //Merge two sorted arrays without extra space(better)
+// public class Darray3{
+//     public static void merge(long[] arr1, long[] arr2){
+//         int n = arr1.length;
+//         int m = arr2.length;
+//         int left = n-1;
+//         int right = 0;
+//         while(left>=0 && right<m){
+//             if(arr1[left]>arr2[right]){
+//                 long temp = arr1[left];
+//                 arr1[left]=arr2[right];
+//                 arr2[right]=temp;
+//                 left--;
+//                 right++;
+//             }
+//             else{
+//                 break;
+//             }
+//         }
+//         Arrays.sort(arr1);
+//         Arrays.sort(arr2);
+//     }
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+//          System.out.print("Enter size of first array: ");
+//         int n = sc.nextInt();
+//         System.out.print("Enter size of second array: ");
+//         int m = sc.nextInt();
+//         long[] arr1 = new long[n];
+//         long[] arr2 = new long[m];
+//         System.out.println("Enter elements of first sorted array:");
+//         for (int i = 0; i < n; i++) {
+//             arr1[i] = sc.nextLong();
+//         }
+//         System.out.println("Enter elements of second sorted array:");
+//         for (int i = 0; i < m; i++) {
+//             arr2[i] = sc.nextLong();
+//         }
+//         merge(arr1, arr2);
+//         System.out.println("First Array after merge:");
+//         System.out.println(Arrays.toString(arr1));
+//         System.out.println("Second Array after merge:");
+//         System.out.println(Arrays.toString(arr2));
+//     }
+// }
+
+//Merge two sorted arrays without extra space(optimal)
 public class Darray3{
-    public static void merge(long[] arr1, long[] arr2){
-        int n = arr1.length;
-        int m = arr2.length;
-        int left = n-1;
-        int right = 0;
-        while(left>=0 && right<m){
-            if(arr1[left]>arr2[right]){
-                long temp = arr1[left];
-                arr1[left]=arr2[right];
-                arr2[right]=temp;
-                left--;
-                right++;
-            }
-            else{
-                break;
-            }
+    public static void swap(long[] arr1, long[] arr2, int ind1, int ind2){
+        if(arr1[ind1]>arr2[ind2]){
+            long temp = arr1[ind1];
+            arr1[ind1]= arr2[ind2];
+            arr2[ind2] =temp;
         }
-        Arrays.sort(arr1);
-        Arrays.sort(arr2);
     }
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-         System.out.print("Enter size of first array: ");
+    public static void merge(long[] arr1, long[] arr2, int n, int m){
+        int len = (n+m);
+        int gap = (len/2) + (len%2);
+            while(gap>0){
+                int left = 0;
+                int right = left + gap;
+                while(right<len){
+                    if(left<n && right>=n){
+                        swap(arr1, arr2, left, right-n);
+                    }
+                    else if(left>=n){
+                        swap(arr2, arr2, left-n, right-n);
+                    }
+                    else{
+                        swap(arr1, arr1, left, right);
+                    }
+
+                    left++;
+                    right++; 
+                }
+                if(gap==1) break;
+                gap = (gap/2)+(gap%2);
+        }
+    }
+     public static void main(String[] args) {
+        Scanner sc= new Scanner(System.in);
+
+        System.out.print("Enter size of first array: ");
         int n = sc.nextInt();
         System.out.print("Enter size of second array: ");
         int m = sc.nextInt();
@@ -667,16 +725,18 @@ public class Darray3{
         long[] arr2 = new long[m];
         System.out.println("Enter elements of first sorted array:");
         for (int i = 0; i < n; i++) {
-            arr1[i] = sc.nextLong();
+            arr1[i] = sc.nextInt();
         }
         System.out.println("Enter elements of second sorted array:");
         for (int i = 0; i < m; i++) {
-            arr2[i] = sc.nextLong();
+            arr2[i] = sc.nextInt();
         }
-        merge(arr1, arr2);
-        System.out.println("First Array after merge:");
+        merge(arr1, arr2,n,m);
+        System.out.println("First Array:");
         System.out.println(Arrays.toString(arr1));
-        System.out.println("Second Array after merge:");
+        System.out.println("Second Array:");
         System.out.println(Arrays.toString(arr2));
+
     }
+
 }
