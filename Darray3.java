@@ -682,61 +682,103 @@ import java.util.*;
 // }
 
 //Merge two sorted arrays without extra space(optimal)
-public class Darray3{
-    public static void swap(long[] arr1, long[] arr2, int ind1, int ind2){
-        if(arr1[ind1]>arr2[ind2]){
-            long temp = arr1[ind1];
-            arr1[ind1]= arr2[ind2];
-            arr2[ind2] =temp;
-        }
-    }
-    public static void merge(long[] arr1, long[] arr2, int n, int m){
-        int len = (n+m);
-        int gap = (len/2) + (len%2);
-            while(gap>0){
-                int left = 0;
-                int right = left + gap;
-                while(right<len){
-                    if(left<n && right>=n){
-                        swap(arr1, arr2, left, right-n);
-                    }
-                    else if(left>=n){
-                        swap(arr2, arr2, left-n, right-n);
-                    }
-                    else{
-                        swap(arr1, arr1, left, right);
-                    }
+// public class Darray3{
+//     public static void swap(long[] arr1, long[] arr2, int ind1, int ind2){
+//         if(arr1[ind1]>arr2[ind2]){
+//             long temp = arr1[ind1];
+//             arr1[ind1]= arr2[ind2];
+//             arr2[ind2] =temp;
+//         }
+//     }
+//     public static void merge(long[] arr1, long[] arr2, int n, int m){
+//         int len = (n+m);
+//         int gap = (len/2) + (len%2);
+//             while(gap>0){
+//                 int left = 0;
+//                 int right = left + gap;
+//                 while(right<len){
+//                     if(left<n && right>=n){
+//                         swap(arr1, arr2, left, right-n);
+//                     }
+//                     else if(left>=n){
+//                         swap(arr2, arr2, left-n, right-n);
+//                     }
+//                     else{
+//                         swap(arr1, arr1, left, right);
+//                     }
 
-                    left++;
-                    right++; 
-                }
-                if(gap==1) break;
-                gap = (gap/2)+(gap%2);
+//                     left++;
+//                     right++; 
+//                 }
+//                 if(gap==1) break;
+//                 gap = (gap/2)+(gap%2);
+//         }
+//     }
+//      public static void main(String[] args) {
+//         Scanner sc= new Scanner(System.in);
+
+//         System.out.print("Enter size of first array: ");
+//         int n = sc.nextInt();
+//         System.out.print("Enter size of second array: ");
+//         int m = sc.nextInt();
+//         long[] arr1 = new long[n];
+//         long[] arr2 = new long[m];
+//         System.out.println("Enter elements of first sorted array:");
+//         for (int i = 0; i < n; i++) {
+//             arr1[i] = sc.nextInt();
+//         }
+//         System.out.println("Enter elements of second sorted array:");
+//         for (int i = 0; i < m; i++) {
+//             arr2[i] = sc.nextInt();
+//         }
+//         merge(arr1, arr2,n,m);
+//         System.out.println("First Array:");
+//         System.out.println(Arrays.toString(arr1));
+//         System.out.println("Second Array:");
+//         System.out.println(Arrays.toString(arr2));
+
+//     }
+
+// }
+
+
+//Find the repeating and missing number(better)
+public class Darray3{
+    public static int[] findMissingRepeatingNo(int arr[], int n){
+        int[] hash = new int[n+1];
+        for(int i=0; i<n; i++){
+            hash[arr[i]]++;
         }
+
+        int repeating = -1;
+        int missing = -1;
+        for(int i=1; i<=n; i++){
+            if(hash[i]==2){
+                repeating = i;
+            }
+            else if(hash[i]==0){
+                missing = i;
+            }
+            if(repeating!= -1 && missing!=-1){
+                break;
+            }
+        }
+        return new int[] {repeating,missing};
     }
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
 
-        System.out.print("Enter size of first array: ");
+        System.out.print("Enter size of array: ");
         int n = sc.nextInt();
-        System.out.print("Enter size of second array: ");
-        int m = sc.nextInt();
-        long[] arr1 = new long[n];
-        long[] arr2 = new long[m];
-        System.out.println("Enter elements of first sorted array:");
+
+        int[] arr = new int[n];
+
+        System.out.println("Enter array elements:");
         for (int i = 0; i < n; i++) {
-            arr1[i] = sc.nextInt();
+            arr[i] = sc.nextInt();
         }
-        System.out.println("Enter elements of second sorted array:");
-        for (int i = 0; i < m; i++) {
-            arr2[i] = sc.nextInt();
-        }
-        merge(arr1, arr2,n,m);
-        System.out.println("First Array:");
-        System.out.println(Arrays.toString(arr1));
-        System.out.println("Second Array:");
-        System.out.println(Arrays.toString(arr2));
-
+         int[] ans = findMissingRepeatingNo(arr,n);
+        System.out.println("Repeating Number = " + ans[0]);
+        System.out.println("Missing Number = " + ans[1]);
     }
-
 }
