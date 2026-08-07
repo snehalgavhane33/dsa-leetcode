@@ -785,38 +785,68 @@ import java.util.*;
 
 
 //Find the repeating and missing number(optimal)
-public class Darray3 {
+// public class Darray3 {
 
-    public static int[] findMissingRepeatingNo(int arr[],int n){
-        long SN = (n*(n+1))/2;
-        long S2N = (n*(n+1)*(2*n+1))/6;
-        long S=0 , S2=0;
+//     public static int[] findMissingRepeatingNo(int arr[],int n){
+//         long SN = (n*(n+1))/2;
+//         long S2N = (n*(n+1)*(2*n+1))/6;
+//         long S=0 , S2=0;
+//         for(int i=0; i<n; i++){
+//             S+=arr[i];
+//             S2+= ((long)arr[i]*(long)arr[i]);
+//         }
+//         long val1 = S-SN;
+//         long val2 = S2 - S2N;
+//         val2 = val2/val1;
+//         long x = (val1+val2)/2;
+//         long y = x-val1;
+//         return new int[]{(int)x, (int)y};
+//     }
+//      public static void main(String[] args) {
+//         Scanner sc= new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter array elements:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+//          int[] ans1 = findMissingRepeatingNo(arr, n);
+//         System.out.println("Repeating Number = " + ans1[0]);
+//         System.out.println("Missing Number = " + ans1[1]);
+
+//     }
+// }
+
+
+//count inversions (brute)
+public class Darray3{
+    public static int countInversions(int arr[], int n){
+        int cnt = 0;
         for(int i=0; i<n; i++){
-            S+=arr[i];
-            S2+= ((long)arr[i]*(long)arr[i]);
+            for(int j=i+1; j<n; j++){
+                if(arr[i]>arr[j]){
+                    cnt++;
+                }
+            }
         }
-        long val1 = S-SN;
-        long val2 = S2 - S2N;
-        val2 = val2/val1;
-        long x = (val1+val2)/2;
-        long y = x-val1;
-        return new int[]{(int)x, (int)y};
+        return cnt;
     }
-     public static void main(String[] args) {
-        Scanner sc= new Scanner(System.in);
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter size of array: ");
+        System.out.print("Enter size of array:");
         int n = sc.nextInt();
-
         int[] arr = new int[n];
 
-        System.out.println("Enter array elements:");
-        for (int i = 0; i < n; i++) {
+        System.out.print("Enter array elements:");
+        for(int i=0; i<n; i++){
             arr[i] = sc.nextInt();
         }
-         int[] ans1 = findMissingRepeatingNo(arr, n);
-        System.out.println("Repeating Number = " + ans1[0]);
-        System.out.println("Missing Number = " + ans1[1]);
 
+        System.out.print("Count is:" + countInversions(arr, n));
     }
 }
