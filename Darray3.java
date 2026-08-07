@@ -852,53 +852,84 @@ import java.util.*;
 // }
 
 //count inversions (optimal)
+// public class Darray3 {
+
+//     public static int merge(int arr[], int low, int mid, int high){
+//         ArrayList<Integer> temp = new ArrayList<>();
+
+//         int left = low;
+//         int right = mid + 1;
+//         int cnt = 0;
+//         while(left<=mid && right<=high){
+//             if(arr[left]<=arr[right]){
+//             temp.add(arr[left]);
+//             left++;
+//             }
+        
+//         else{
+//             temp.add(arr[right]);
+//             cnt += (mid-left+1);
+//             right++;
+//         }
+//     }
+//     while(left<=mid){
+//         temp.add(arr[left]);
+//         left++;
+//     }
+//     while(right<=high){
+//         temp.add(arr[right]);
+//         right++;
+//     }
+//     for(int i=low; i<=high; i++){
+//         arr[i]= temp.get(i-low);
+//     }
+//     return cnt;
+// }
+//     public static int mS(int arr[], int low, int high){
+//     int cnt = 0;
+//     if(low>= high) return cnt;
+//     int mid = (low+high)/2;
+
+//     cnt+= mS(arr,low,mid);
+//     cnt+=mS(arr,mid+1,high);
+//     cnt+= merge(arr, low, mid, high);
+//     return cnt;
+//     }
+//     public static int countInversions(int arr[], int n){
+//     return mS(arr,0,n-1);
+//     }
+
+//     public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array:");
+//         int n = sc.nextInt();
+//         int[] arr = new int[n];
+
+//         System.out.print("Enter array elements:");
+//         for(int i=0; i<n; i++){
+//             arr[i] = sc.nextInt();
+//         }
+
+//         System.out.print("Count is:" + countInversions(arr, n));
+//     }
+// }
+
+//Reverse pairs brute
 public class Darray3 {
 
-    public static int merge(int arr[], int low, int mid, int high){
-        ArrayList<Integer> temp = new ArrayList<>();
-
-        int left = low;
-        int right = mid + 1;
-        int cnt = 0;
-        while(left<=mid && right<=high){
-            if(arr[left]<=arr[right]){
-            temp.add(arr[left]);
-            left++;
+     public static int reverseNo(int arr[], int n){
+        int cnt =0;
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                if((long)arr[i]>2L*arr[j]){
+                    cnt++;
+                }
             }
-        
-        else{
-            temp.add(arr[right]);
-            cnt += (mid-left+1);
-            right++;
         }
+        return cnt;
     }
-    while(left<=mid){
-        temp.add(arr[left]);
-        left++;
-    }
-    while(right<=high){
-        temp.add(arr[right]);
-        right++;
-    }
-    for(int i=low; i<=high; i++){
-        arr[i]= temp.get(i-low);
-    }
-    return cnt;
-}
-    public static int mS(int arr[], int low, int high){
-    int cnt = 0;
-    if(low>= high) return cnt;
-    int mid = (low+high)/2;
-
-    cnt+= mS(arr,low,mid);
-    cnt+=mS(arr,mid+1,high);
-    cnt+= merge(arr, low, mid, high);
-    return cnt;
-    }
-    public static int countInversions(int arr[], int n){
-    return mS(arr,0,n-1);
-    }
-
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -911,6 +942,7 @@ public class Darray3 {
             arr[i] = sc.nextInt();
         }
 
-        System.out.print("Count is:" + countInversions(arr, n));
+        System.out.print("Count is:" + reverseNo(arr, n));
     }
+    
 }
