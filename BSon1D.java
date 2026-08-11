@@ -328,8 +328,6 @@ public class BSon1D {
 
         return ans;
     }
-
-
     // Upper Bound:
     // First index where arr[index] > target
     public static int upperBound(int arr[], int n, int target) {
