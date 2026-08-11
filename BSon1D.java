@@ -302,98 +302,174 @@ import java.util.*;
 // }
 
 
-//Q6.First and last occurrence
-public class BSon1D {
+//Q6.First and last occurrence(code 1)
+// public class BSon1D {
 
-    // Lower Bound:
-    // First index where arr[index] >= target
-    public static int lowerBound(int arr[], int n, int target) {
+//     // Lower Bound:
+//     // First index where arr[index] >= target
+//     public static int lowerBound(int arr[], int n, int target) {
 
+//         int low = 0;
+//         int high = n - 1;
+//         int ans = n;
+
+//         while (low <= high) {
+
+//             int mid = (low + high) / 2;
+
+//             if (arr[mid] >= target) {
+//                 ans = mid;
+//                 high = mid - 1;
+//             } 
+//             else {
+//                 low = mid + 1;
+//             }
+//         }
+
+//         return ans;
+//     }
+//     // Upper Bound:
+//     // First index where arr[index] > target
+//     public static int upperBound(int arr[], int n, int target) {
+
+//         int low = 0;
+//         int high = n - 1;
+//         int ans = n;
+
+//         while (low <= high) {
+
+//             int mid = (low + high) / 2;
+
+//             if (arr[mid] > target) {
+//                 ans = mid;
+//                 high = mid - 1;
+//             } 
+//             else {
+//                 low = mid + 1;
+//             }
+//         }
+
+//         return ans;
+//     }
+
+
+//     // Find first and last occurrence
+//     public static int[] firstAndLastPosition(int arr[], int n, int target) {
+
+//         // Find first occurrence
+//         int lb = lowerBound(arr, n, target);
+
+//         // Target does not exist
+//         if (lb == n || arr[lb] != target) {
+//             return new int[]{-1, -1};
+//         }
+
+//         // Find last occurrence
+//         int ub = upperBound(arr, n, target);
+
+//         return new int[]{lb, ub - 1};
+//     }
+
+
+//     public static void main(String[] args) {
+
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int arr[] = new int[n];
+
+//         System.out.println("Enter sorted array elements:");
+
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         System.out.print("Enter target element: ");
+//         int target = sc.nextInt();
+
+//         int ans[] = firstAndLastPosition(arr, n, target);
+
+//         System.out.println("First Occurrence = " + ans[0]);
+//         System.out.println("Last Occurrence = " + ans[1]);
+
+//         sc.close();
+//     }
+// }
+
+//Q6.First and last occurrence(code 2)
+public class BSon1D{
+    public static int firstOccurance(int arr[], int n, int target){
         int low = 0;
-        int high = n - 1;
-        int ans = n;
-
-        while (low <= high) {
-
-            int mid = (low + high) / 2;
-
-            if (arr[mid] >= target) {
-                ans = mid;
-                high = mid - 1;
-            } 
-            else {
-                low = mid + 1;
+        int high = n-1;
+        int first = -1;
+        while(low<=high){
+            int mid = (low+high)/2;
+            if(arr[mid]==target){
+                first = mid;
+                high=mid-1;
+            }
+            else if(arr[mid]<target){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
             }
         }
-
-        return ans;
+        return first;
     }
-    // Upper Bound:
-    // First index where arr[index] > target
-    public static int upperBound(int arr[], int n, int target) {
 
+    public static int lastOccurance(int arr[], int n, int target){
         int low = 0;
-        int high = n - 1;
-        int ans = n;
-
-        while (low <= high) {
-
-            int mid = (low + high) / 2;
-
-            if (arr[mid] > target) {
-                ans = mid;
-                high = mid - 1;
-            } 
-            else {
-                low = mid + 1;
+        int high = n-1;
+        int last = -1;
+        while(low<=high){
+            int mid = (low+high)/2;
+            if(arr[mid]==target){
+                last = mid;
+                low=mid+1;
+            }
+            else if(arr[mid]<target){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
             }
         }
-
-        return ans;
+        return last;
     }
 
+     
 
-    // Find first and last occurrence
-    public static int[] firstAndLastPosition(int arr[], int n, int target) {
-
-        // Find first occurrence
-        int lb = lowerBound(arr, n, target);
-
-        // Target does not exist
-        if (lb == n || arr[lb] != target) {
-            return new int[]{-1, -1};
+    public static int[] firstAndLastPosition(int arr[], int n, int target){
+        int first = firstOccurance(arr, n, target);
+        if(first==-1){
+            return new int[]{-1,-1};
         }
-
-        // Find last occurrence
-        int ub = upperBound(arr, n, target);
-
-        return new int[]{lb, ub - 1};
+        int last = lastOccurance(arr, n, target);
+        return new int[]{first,last};
     }
-
 
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Enter size of array: ");
         int n = sc.nextInt();
 
-        int arr[] = new int[n];
+        int[] arr = new int[n];
 
-        System.out.println("Enter sorted array elements:");
-
+        System.out.println("Enter array elements:");
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
         System.out.print("Enter target element: ");
-        int target = sc.nextInt();
+         int target = sc.nextInt();
 
-        int ans[] = firstAndLastPosition(arr, n, target);
+        int[] result = firstAndLastPosition(arr, n, target);
+        System.out.println("First occurrence: " + result[0]);
+        System.out.println("Last occurrence: " + result[1]);
 
-        System.out.println("First Occurrence = " + ans[0]);
-        System.out.println("Last Occurrence = " + ans[1]);
-
-        sc.close();
     }
 }
