@@ -474,59 +474,120 @@ import java.util.*;
 
 
 //Q7.Count Occurrences in a Sorted Array
+// public class BSon1D {
+
+//     public static int firstOccurance(int arr[], int n, int target){
+//         int low = 0;
+//         int high = n-1;
+//         int first = -1;
+//         while(low<=high){
+//             int mid = (low+high)/2;
+//             if(arr[mid]==target){
+//                 first = mid;
+//                 high=mid-1;
+//             }
+//             else if(arr[mid]<target){
+//                 low=mid+1;
+//             }
+//             else{
+//                 high=mid-1;
+//             }
+//         }
+//         return first;
+//     }
+
+//     public static int lastOccurance(int arr[], int n, int target){
+//         int low = 0;
+//         int high = n-1;
+//         int last = -1;
+//         while(low<=high){
+//             int mid = (low+high)/2;
+//             if(arr[mid]==target){
+//                 last = mid;
+//                 low=mid+1;
+//             }
+//             else if(arr[mid]<target){
+//                 low=mid+1;
+//             }
+//             else{
+//                 high=mid-1;
+//             }
+//         }
+//         return last;
+//     }
+    
+//     public static int count(int arr[], int n , int target){
+//         int first = firstOccurance(arr, n, target);
+//         if(first==-1){
+//             return 0;
+//         }
+
+//         int last = lastOccurance(arr, n, target);
+//         return last - first + 1;
+//     }
+
+
+//     public static void main(String[] args) {
+
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int arr[] = new int[n];
+
+//         System.out.println("Enter sorted array elements:");
+
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         System.out.print("Enter target element: ");
+//         int target = sc.nextInt();
+
+//         int ans = count(arr, n, target);
+
+//         System.out.println("Number of occurrences = " + ans);
+
+//         sc.close();
+//     }
+// }
+
+
+//Q8.Search in rotated sorted array-I
 public class BSon1D {
 
-    public static int firstOccurance(int arr[], int n, int target){
+    public static int rotateSearch(int arr[], int n, int target){
         int low = 0;
         int high = n-1;
-        int first = -1;
         while(low<=high){
             int mid = (low+high)/2;
             if(arr[mid]==target){
-                first = mid;
-                high=mid-1;
+                return mid;
             }
-            else if(arr[mid]<target){
-                low=mid+1;
-            }
-            else{
-                high=mid-1;
-            }
+                if(arr[low]<=arr[mid]){
+                    if(arr[low]<=target && target<arr[mid]){
+                        high=mid-1;
+
+                    }
+                    else{
+                        low=mid+1;
+                    }
+                }
+                else{
+                    if(arr[mid]<target && target<=arr[high]){
+                        low=mid+1;
+                    }
+                    else{
+                        high = mid - 1;
+
+                    }
+                }
         }
-        return first;
+        return -1;
     }
 
-    public static int lastOccurance(int arr[], int n, int target){
-        int low = 0;
-        int high = n-1;
-        int last = -1;
-        while(low<=high){
-            int mid = (low+high)/2;
-            if(arr[mid]==target){
-                last = mid;
-                low=mid+1;
-            }
-            else if(arr[mid]<target){
-                low=mid+1;
-            }
-            else{
-                high=mid-1;
-            }
-        }
-        return last;
-    }
     
-    public static int count(int arr[], int n , int target){
-        int first = firstOccurance(arr, n, target);
-        if(first==-1){
-            return 0;
-        }
-
-        int last = lastOccurance(arr, n, target);
-        return last - first + 1;
-    }
-
-
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -536,18 +597,23 @@ public class BSon1D {
 
         int arr[] = new int[n];
 
-        System.out.println("Enter sorted array elements:");
+        System.out.println("Enter rotated sorted array:");
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
-        System.out.print("Enter target element: ");
+        System.out.print("Enter target: ");
         int target = sc.nextInt();
 
-        int ans = count(arr, n, target);
+        int ans = rotateSearch(arr, n, target);
 
-        System.out.println("Number of occurrences = " + ans);
+        if (ans == -1) {
+            System.out.println("Target not found");
+        }
+        else {
+            System.out.println("Target found at index: " + ans);
+        }
 
         sc.close();
     }
