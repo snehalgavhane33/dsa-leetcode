@@ -692,29 +692,91 @@ import java.util.*;
 
 
 //Q10.Find minimum in Rotated Sorted Array
+// public class BSon1D{
+//     public static int findMin(int arr[], int n){
+//         int low = 0;
+//         int high = n-1;
+//         int ans= Integer.MAX_VALUE;
+//         while(low<=high){
+//             int mid = (low + high)/2;
+//             if(arr[low]<=arr[high]){
+//                 ans = Math.min(ans,arr[low]);
+//                 break;
+//              }
+
+//             if(arr[low]<=arr[mid]){
+//                 ans = Math.min(ans,arr[low]);
+//                 low = mid + 1;
+                
+//             }
+//             else{
+//                 ans = Math.min(ans,arr[mid]);
+//                 high = mid - 1;
+
+//             }
+//         }
+//         return ans;
+
+//     }
+
+//     public static void main(String[] args) {
+
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter rotated sorted array:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+//         int ans = findMin(arr, n);
+
+//         System.out.println("Minimum element = " + ans);
+
+//         sc.close();
+//     }
+// }
+
+
+//Q11.Find out how many times the array is rotated
 public class BSon1D{
-    public static int findMin(int arr[], int n){
+    public static int findRotationCount(int arr[], int n){
         int low = 0;
         int high = n-1;
+        int index = -1;
         int ans= Integer.MAX_VALUE;
         while(low<=high){
             int mid = (low + high)/2;
             if(arr[low]<=arr[high]){
-                ans = Math.min(ans,arr[low]);
-                break;}
+                if(arr[low]<ans){
+                    index = low;
+                    ans = arr[low];
+                }
+                break;
+            }
 
             if(arr[low]<=arr[mid]){
-                ans = Math.min(ans,arr[low]);
+                if(arr[low]<ans){
+                    index = low;
+                    ans = arr[low];
+                }
                 low = mid + 1;
                 
             }
             else{
-                ans = Math.min(ans,arr[mid]);
+                if(arr[mid]<ans){
+                    index=mid;
+                    ans =arr[mid];
+                }
                 high = mid - 1;
 
             }
         }
-        return ans;
+        return index;
 
     }
 
@@ -732,9 +794,9 @@ public class BSon1D{
             arr[i] = sc.nextInt();
         }
 
-        int ans = findMin(arr, n);
+        
 
-        System.out.println("Minimum element = " + ans);
+        System.out.println("Array rotated " + findRotationCount(arr, n) +" times." );
 
         sc.close();
     }
