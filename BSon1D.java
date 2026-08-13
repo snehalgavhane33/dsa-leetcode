@@ -743,45 +743,93 @@ import java.util.*;
 
 
 //Q11.Find out how many times the array is rotated
-public class BSon1D{
-    public static int findRotationCount(int arr[], int n){
-        int low = 0;
-        int high = n-1;
-        int index = -1;
-        int ans= Integer.MAX_VALUE;
-        while(low<=high){
-            int mid = (low + high)/2;
-            if(arr[low]<=arr[high]){
-                if(arr[low]<ans){
-                    index = low;
-                    ans = arr[low];
-                }
-                break;
-            }
+// public class BSon1D{
+//     public static int findRotationCount(int arr[], int n){
+//         int low = 0;
+//         int high = n-1;
+//         int index = -1;
+//         int ans= Integer.MAX_VALUE;
+//         while(low<=high){
+//             int mid = (low + high)/2;
+//             if(arr[low]<=arr[high]){
+//                 if(arr[low]<ans){
+//                     index = low;
+//                     ans = arr[low];
+//                 }
+//                 break;
+//             }
 
-            if(arr[low]<=arr[mid]){
-                if(arr[low]<ans){
-                    index = low;
-                    ans = arr[low];
-                }
-                low = mid + 1;
+//             if(arr[low]<=arr[mid]){
+//                 if(arr[low]<ans){
+//                     index = low;
+//                     ans = arr[low];
+//                 }
+//                 low = mid + 1;
                 
+//             }
+//             else{
+//                 if(arr[mid]<ans){
+//                     index=mid;
+//                     ans =arr[mid];
+//                 }
+//                 high = mid - 1;
+
+//             }
+//         }
+//         return index;
+
+//     }
+
+//     public static void main(String[] args) {
+
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter size of array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.println("Enter rotated sorted array:");
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//         }
+
+        
+
+//         System.out.println("Array rotated " + findRotationCount(arr, n) +" times." );
+
+//         sc.close();
+//     }
+// }
+
+
+ //Q12.Single element in a Sorted Array
+ public class BSon1D {
+ 
+    public static int singleNonDuplicate(int arr[], int n){
+        if(n==1) return arr[0];
+        if(arr[0] != arr[1] ) return arr[0];
+        if(arr[n-1] != arr[n-2]) return arr[n-1];
+        int low = 1;
+        int high = n-2;
+        while(low<=high){
+            int mid = (low+high)/2;
+            if(arr[mid]!=arr[mid-1] && arr[mid]!=arr[mid+1]){
+                return arr[mid];
+            }
+            if(mid%2 ==1 && arr[mid]==arr[mid-1] || (mid%2==0 && arr[mid]==arr[mid+1])){
+                low = mid + 1;
+
             }
             else{
-                if(arr[mid]<ans){
-                    index=mid;
-                    ans =arr[mid];
-                }
-                high = mid - 1;
-
+                high = mid -1 ;
             }
         }
-        return index;
 
+        return -1;
     }
 
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Enter size of array: ");
@@ -789,15 +837,12 @@ public class BSon1D{
 
         int[] arr = new int[n];
 
-        System.out.println("Enter rotated sorted array:");
+        System.out.println("Enter array elements:");
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
         }
 
-        
-
-        System.out.println("Array rotated " + findRotationCount(arr, n) +" times." );
-
-        sc.close();
+        System.out.print("Single element: " + singleNonDuplicate(arr, n));
     }
-}
+
+ }
