@@ -132,6 +132,7 @@ import java.util.*;
 
 
 //Q4.Minimum days to make M bouquets
+public class BSonANS{
  public static boolean possible(int arr[], int days, int m, int k, int n){
         int cnt =0;
         int noOfB=0;
@@ -189,4 +190,5 @@ import java.util.*;
 
         }
     }
+}
 
