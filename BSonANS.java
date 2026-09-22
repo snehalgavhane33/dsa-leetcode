@@ -132,47 +132,107 @@ import java.util.*;
 
 
 //Q4.Minimum days to make M bouquets
+// public class BSonANS{
+//  public static boolean possible(int arr[], int days, int m, int k, int n){
+//         int cnt =0;
+//         int noOfB=0;
+//         for(int i=0; i<n;i++){
+//             if(arr[i]<=days){
+//                 cnt++;
+//             }else{
+//                 noOfB += (cnt/k);
+//                 cnt=0;
+//             }
+//         }
+//         noOfB+=(cnt/k);
+//         return noOfB>=m;
+//     }
+//     //Q4 function 2
+//     public static int roseGarden(int arr[], int r, int b, int n){
+//         long val = (long) r * b;
+//         if(val>n) return -1;
+//         int mini = Integer.MAX_VALUE;
+//         int maxi = Integer.MIN_VALUE;
+//         for(int i=0;i<n;i++){
+//             mini = Math.min(mini, arr[i]);
+//             maxi = Math.max(maxi, arr[i]);
+//         }
+//         int low = mini;
+//         int high = maxi;
+//         while (low <= high) {
+//             int mid = (low + high) / 2;
+//             if (possible(arr, mid, b, r,n)) {
+//                 high = mid - 1;
+//             } 
+//             else {
+//                 low = mid + 1;
+//             }
+//         }
+//         return low;
+//     }
+//      public static void main(String[] args) {
+//         Scanner sc = new Scanner(System.in);
+
+//         System.out.print("Enter the size of the array: ");
+//         int n = sc.nextInt();
+
+//         int[] arr = new int[n];
+
+//         System.out.print("Enter the elements in the array: ");
+
+//         for (int i = 0; i < n; i++) {
+//             arr[i] = sc.nextInt();
+//              System.out.print("Enter flowers per bouquet: ");
+//         int r = sc.nextInt();
+//         System.out.print("Enter number of bouquets: ");
+//         int b = sc.nextInt();
+//         System.out.println("Minimum days required = " + roseGarden(arr, r, b, n));
+
+//         }
+//     }
+// }
+
+//Q6.Capacity to Ship Packages Within D Days
 public class BSonANS{
- public static boolean possible(int arr[], int days, int m, int k, int n){
-        int cnt =0;
-        int noOfB=0;
-        for(int i=0; i<n;i++){
-            if(arr[i]<=days){
-                cnt++;
+
+    public static int findDays(int arr[], int cap, int n){
+        int days = 1;
+        int load = 0;
+        for(int i=0; i<n; i++){
+            if(arr[i]+load>cap){
+                days++;
+                load = arr[i];
             }else{
-                noOfB += (cnt/k);
-                cnt=0;
+                load+=arr[i];
             }
         }
-        noOfB+=(cnt/k);
-        return noOfB>=m;
+        return days;
     }
-    //Q4 function 2
-    public static int roseGarden(int arr[], int r, int b, int n){
-        long val = (long) r * b;
-        if(val>n) return -1;
-        int mini = Integer.MAX_VALUE;
-        int maxi = Integer.MIN_VALUE;
-        for(int i=0;i<n;i++){
-            mini = Math.min(mini, arr[i]);
-            maxi = Math.max(maxi, arr[i]);
+    public static int leastWeightCapacity(int[] arr, int d , int n){
+        int low = 0;
+        int high = 0;
+        for(int i=0; i<n; i++){
+            low = Math.max(low,arr[i]);
+            high += arr[i];
         }
-        int low = mini;
-        int high = maxi;
-        while (low <= high) {
-            int mid = (low + high) / 2;
-            if (possible(arr, mid, b, r,n)) {
-                high = mid - 1;
-            } 
-            else {
-                low = mid + 1;
+
+        while(low<=high){
+            int mid = (low+high)/2;
+            int numberOfDays = findDays(arr, mid,n);
+            if(numberOfDays<=d){
+                high=mid-1;
+            }
+            else{
+                low = mid+1;
             }
         }
         return low;
     }
-     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of days: ");
+        int d = sc.nextInt();
         System.out.print("Enter the size of the array: ");
         int n = sc.nextInt();
 
@@ -182,13 +242,8 @@ public class BSonANS{
 
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
-             System.out.print("Enter flowers per bouquet: ");
-        int r = sc.nextInt();
-        System.out.print("Enter number of bouquets: ");
-        int b = sc.nextInt();
-        System.out.println("Minimum days required = " + roseGarden(arr, r, b, n));
-
-        }
+        
+        System.out.println("Minimum capacity required = " + leastWeightCapacity(arr, d, n));
     }
 }
-
+}
