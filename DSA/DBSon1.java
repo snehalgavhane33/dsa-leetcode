@@ -1,7 +1,9 @@
+package DSA;
+
 import java.util.*;
 
 //Q1.Search X in sorted array(iterative code)
-// public class BSon1D{
+// public class DBSon1{
 //     public static int binarySearch(int arr[], int n, int target){
 //         int low=0;
 //         int high = n-1;
@@ -46,7 +48,7 @@ import java.util.*;
 // }
 
 //Q1.Search X in sorted array(recursive code)
-// public class BSon1D {
+// public class DBSon1 {
 
 //     public static int bs(int arr[], int low , int high, int target){
 //         if(low> high) return -1;
@@ -93,7 +95,7 @@ import java.util.*;
 
 
 //Q2 lower bound
-// public class BSon1D {
+// public class DBSon1 {
 
 //     public static int lowerBound(int arr[], int n, int target){
 //         int low = 0;
@@ -139,7 +141,7 @@ import java.util.*;
 // }
 
 //Q3 upper bound
-// public class BSon1D {
+// public class DBSon1 {
 //     public static int upperBound(int arr[], int n, int target){
 //         int low = 0;
 //         int high = n-1;
@@ -185,7 +187,7 @@ import java.util.*;
 
 
 //Q4.Search insert position(same as lower bound)
-// public class BSon1D {
+// public class DBSon1 {
 
 //     public static int insertPosition(int arr[], int n, int target){
 //         int low = 0;
@@ -231,7 +233,7 @@ import java.util.*;
 
 //Q5.Floor and Ceil in Sorted Array
 // Floor: Greatest element <= target
-// public class BSon1D {
+// public class DBSon1 {
 
 //     public static int floor(int arr[], int n , int target){
 //         int low = 0;
@@ -303,7 +305,7 @@ import java.util.*;
 
 
 //Q6.First and last occurrence(code 1)
-// public class BSon1D {
+// public class DBSon1 {
 
 //     // Lower Bound:
 //     // First index where arr[index] >= target
@@ -399,7 +401,7 @@ import java.util.*;
 // }
 
 //Q6.First and last occurrence(code 2)
-// public class BSon1D{
+// public class DBSon1{
 //     public static int firstOccurance(int arr[], int n, int target){
 //         int low = 0;
 //         int high = n-1;
@@ -474,7 +476,7 @@ import java.util.*;
 
 
 //Q7.Count Occurrences in a Sorted Array
-// public class BSon1D {
+// public class DBSon1 {
 
 //     public static int firstOccurance(int arr[], int n, int target){
 //         int low = 0;
@@ -620,7 +622,7 @@ import java.util.*;
 // }
 
 //Q9.Search in rotated sorted array-II
-// public class BSon1D {
+// public class DBSon1 {
 
 //     public static int rotateSearch(int arr[], int n, int target){
 //         int low = 0;
@@ -692,7 +694,7 @@ import java.util.*;
 
 
 //Q10.Find minimum in Rotated Sorted Array
-// public class BSon1D{
+// public class DBSon1{
 //     public static int findMin(int arr[], int n){
 //         int low = 0;
 //         int high = n-1;
@@ -743,7 +745,7 @@ import java.util.*;
 
 
 //Q11.Find out how many times the array is rotated
-// public class BSon1D{
+// public class DBSon1{
 //     public static int findRotationCount(int arr[], int n){
 //         int low = 0;
 //         int high = n-1;
@@ -804,7 +806,7 @@ import java.util.*;
 
 
  //Q12.Single element in a Sorted Array
-//  public class BSon1D {
+//  public class DBSon1 {
  
 //     public static int singleNonDuplicate(int arr[], int n){
 //         if(n==1) return arr[0];
@@ -849,7 +851,7 @@ import java.util.*;
 
 
 //Q13.Find peak element
-public class BSon1D{
+public class DBSon1{
     public static int findPeak(int arr[], int n){
         if(n==1) return 0;
         if(arr[0]>arr[1]) return 0;
@@ -884,5 +886,6 @@ public class BSon1D{
             arr[i] = sc.nextInt();
         }
         System.out.print("Peak elementgit " + arr[findPeak(arr, n)]);
+        sc.close();
     }
 }

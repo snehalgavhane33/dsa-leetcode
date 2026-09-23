@@ -1,3 +1,4 @@
+package DSA;
 import java.util.Scanner;
 /*//Given an integer N, return the number of digits in N
 
@@ -155,5 +156,6 @@ public class Dmath {
          System.out.println("enter a no:");
          int n = sc.nextInt();
          prime(n);
+         sc.close();
     }
 }

@@ -1,3 +1,4 @@
+package DSA;
 import java.util.Scanner;
 
 // public class Drecursion{
@@ -188,5 +189,6 @@ public class Drecursion{
          System.out.print("enter a no:");
          int n = sc.nextInt();
          System.out.println(fibo(n));
+         sc.close();
     }
 }

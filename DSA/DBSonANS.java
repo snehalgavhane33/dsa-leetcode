@@ -1,3 +1,4 @@
+package DSA;
 import java.util.*;
 
 //Q1.Find square root of a number
@@ -193,7 +194,7 @@ import java.util.*;
 // }
 
 //Q6.Capacity to Ship Packages Within D Days
-public class BSonANS{
+public class DBSonANS{
 
     public static int findDays(int arr[], int cap, int n){
         int days = 1;
@@ -244,6 +245,7 @@ public class BSonANS{
             arr[i] = sc.nextInt();
         
         System.out.println("Minimum capacity required = " + leastWeightCapacity(arr, d, n));
+        sc.close();
     }
 }
 }

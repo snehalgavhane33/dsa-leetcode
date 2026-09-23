@@ -1,4 +1,5 @@
-
+package DSA;
+import java.util.*;
 
 public class Dpattern {
     public static void main(String[] args) {

@@ -13,5 +13,7 @@ public class loops {
         }while(number >=0);
 
         System.out.println("end");
+        sc.close();
+        
     }
 }

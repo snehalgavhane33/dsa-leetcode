@@ -1,3 +1,4 @@
+package DSA;
 import java.util.*;
 
 // public class Darray2 {
@@ -1070,5 +1071,6 @@ import java.util.*;
 //         System.out.print("Enter value of k: ");
 //         int k = sc.nextInt();
 //         System.out.println("Number of subarrays with sum " + k + " = " + subarray(arr, n, k));
+//          sc.close();
 //      }
 // }

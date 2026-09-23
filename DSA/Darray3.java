@@ -1,8 +1,9 @@
                  //HARD PROBLEM ON ARRAY
 
-
-//pascal triangle : given R & C print specific no.
+package DSA;
 import java.util.*;
+//pascal triangle : given R & C print specific no.
+
 
 // public class Darray3{
 //     public static long nCr(int n , int r){

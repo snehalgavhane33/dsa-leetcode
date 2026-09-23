@@ -1,0 +1,51 @@
+package DSA;
+import java.util.*;
+
+public class DBS2Darray{
+    public static int lowerBound(int arr[] , int n, int target){
+        int low = 0;
+        int high = n-1;
+        int ans = n;
+        while(low<=high){
+            int mid = (low+high)/2;
+            if(arr[mid]>=target){
+                ans=mid;
+                high = mid-1;
+            }else{
+                low = mid+1;
+
+            }
+        }
+        return ans;
+    }
+    
+    public static int rowWithMinimumOne2(int arr[][], int n, int m){
+        int cnt_max = 0;
+        int index = -1;
+        for(int i=0; i<n; i++){
+            int cnt_ones = m- lowerBound(arr[i], m, i);
+            if(cnt_ones > cnt_max){
+                cnt_max=cnt_ones;
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of rows: ");
+        int n = sc.nextInt();
+        System.out.print("Enter number of columns: ");
+        int m = sc.nextInt();
+        int arr[][] = new int[n][m];
+        System.out.println("Enter matrix elements:");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                arr[i][j] = sc.nextInt();
+            }
+        }
+         System.out.println("Row with maximum number of 1s: " + rowWithMinimumOne2(arr, n, m));
+         sc.close();
+    }
+}

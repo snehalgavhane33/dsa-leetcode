@@ -1,4 +1,5 @@
-import java.util.Scanner;
+package DSA;
+
 import java.util.*;
 
 // public class Dhash{
