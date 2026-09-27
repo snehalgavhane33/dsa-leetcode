@@ -133,24 +133,79 @@ import java.util.*;
 
 
 //Q3.Search in 2D matrix - II
-public class DBS2Darray{
-    public static int[] findTarget(int n, int m, int arr[][], int target){
-        int row =0;
-        int col = m-1;
+// public class DBS2Darray{
+//     public static int[] findTarget(int n, int m, int arr[][], int target){
+//         int row =0;
+//         int col = m-1;
 
-        while(row<n && col>=0){
-            if(arr[row][col] == target){
-                return new int[] {row,col};
-            }
-            if(arr[row][col]<target){
-                row++;
-            }else{
-                col--;
+//         while(row<n && col>=0){
+//             if(arr[row][col] == target){
+//                 return new int[] {row,col};
+//             }
+//             if(arr[row][col]<target){
+//                 row++;
+//             }else{
+//                 col--;
+//             }
+//         }
+//         return new int[] {-1,-1};
+//     }
+
+//      public static void main(String[] args){
+//         Scanner sc = new Scanner(System.in);
+//         System.out.print("Enter number of rows: ");
+//         int n = sc.nextInt();
+//         System.out.print("Enter number of columns: ");
+//         int m = sc.nextInt();
+//         int arr[][] = new int[n][m];
+//         System.out.println("Enter matrix elements:");
+//         for (int i = 0; i < n; i++) {
+//             for (int j = 0; j < m; j++) {
+//                 arr[i][j] = sc.nextInt();
+//             }
+//         }
+//         System.out.print("Enter target: ");
+//         int target = sc.nextInt();
+//         System.out.println("Target found: " +  Arrays.toString(findTarget(n, m, arr, target)));
+//         sc.close();
+
+//     }
+// }
+
+
+//Q4.Find Peak Element - II
+public class DBS2Darray {
+
+    public static int findMax(int arr[][], int n , int m, int col){
+        int maxVal = -1;
+        int index = -1;
+        for(int i=0; i<n; i++){
+            if(arr[i][col] > maxVal){
+                maxVal = arr[i][col];
+                index = i;
             }
         }
-        return new int[] {-1,-1};
+        return index;
     }
 
+     public static int[] findPeakGrid(int arr[][], int n, int m){
+        int low =0;
+        int high = m-1;
+        while(low<=high){
+            int mid= (low+high)/2;
+            int maxRowIndex=findMax(arr, n, m, mid);
+            int left =mid-1>=0 ? arr[maxRowIndex] [mid -1]: -1;
+            int right = mid + 1 < m ? arr[maxRowIndex][mid + 1]: -1;
+            if(arr[maxRowIndex][mid] >left && arr[maxRowIndex][mid] > right){
+                return new int[] {maxRowIndex, mid};
+            }else if (arr[maxRowIndex][mid] < left) {
+                high =mid -1;
+            }else {
+                low =mid+ 1;
+            }
+        }
+        return new int[] {-1, -1};
+    }
      public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter number of rows: ");
@@ -164,10 +219,9 @@ public class DBS2Darray{
                 arr[i][j] = sc.nextInt();
             }
         }
-        System.out.print("Enter target: ");
-        int target = sc.nextInt();
-        System.out.println("Target found: " +  Arrays.toString(findTarget(n, m, arr, target)));
-        sc.close();
+         int ans[] = findPeakGrid(arr, n, m);
+        System.out.println("Peak element position: ["+ ans[0] + ", " + ans[1] + "]");
+        System.out.println("Peak element: " + arr[ans[0]][ans[1]]);
 
     }
 }
