@@ -89,28 +89,69 @@ import java.util.*;
 // }
 
 //Q2.Search in a 2D Matrix(better)
+// public class DBS2Darray{
+//      public static boolean findTarget2(int n, int m, int arr[][], int target){
+//         if(arr.length == 0) return false;
+
+//         int low =0;
+//         int high = n*m -1;
+
+//         while(low<=high){
+//             int mid = low + (high-low)/2;
+//             if(arr[mid/m][mid%m]==target){
+//                 return true;
+//             }
+//             if(arr[mid/m][mid%m]<target){
+//                 low= mid+1;
+//             }else{
+//                 high = mid-1;
+//             }
+//         }
+//         return false;
+//     }
+
+//         public static void main(String[] args){
+//         Scanner sc = new Scanner(System.in);
+//         System.out.print("Enter number of rows: ");
+//         int n = sc.nextInt();
+//         System.out.print("Enter number of columns: ");
+//         int m = sc.nextInt();
+//         int arr[][] = new int[n][m];
+//         System.out.println("Enter matrix elements:");
+//         for (int i = 0; i < n; i++) {
+//             for (int j = 0; j < m; j++) {
+//                 arr[i][j] = sc.nextInt();
+//             }
+//         }
+//         System.out.print("Enter target: ");
+//         int target = sc.nextInt();
+        
+//         System.out.println("Target found: " + findTarget2(n, m, arr, target));
+//     }
+
+// }
+
+
+//Q3.Search in 2D matrix - II
 public class DBS2Darray{
-     public static boolean findTarget2(int n, int m, int arr[][], int target){
-        if(arr.length == 0) return false;
+    public static int[] findTarget(int n, int m, int arr[][], int target){
+        int row =0;
+        int col = m-1;
 
-        int low =0;
-        int high = n*m -1;
-
-        while(low<=high){
-            int mid = low + (high-low)/2;
-            if(arr[mid/m][mid%m]==target){
-                return true;
+        while(row<n && col>=0){
+            if(arr[row][col] == target){
+                return new int[] {row,col};
             }
-            if(arr[mid/m][mid%m]<target){
-                low= mid+1;
+            if(arr[row][col]<target){
+                row++;
             }else{
-                high = mid-1;
+                col--;
             }
         }
-        return false;
+        return new int[] {-1,-1};
     }
 
-        public static void main(String[] args){
+     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter number of rows: ");
         int n = sc.nextInt();
@@ -125,8 +166,8 @@ public class DBS2Darray{
         }
         System.out.print("Enter target: ");
         int target = sc.nextInt();
-        
-        System.out.println("Target found: " + findTarget2(n, m, arr, target));
-    }
+        System.out.println("Target found: " +  Arrays.toString(findTarget(n, m, arr, target)));
+        sc.close();
 
+    }
 }
